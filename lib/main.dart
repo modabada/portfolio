@@ -31,19 +31,21 @@ class _AppState extends State<App> {
       builder: (context, AsyncSnapshot snapshot) {
         if (snapshot.hasData == false) {
           return MaterialApp(
-              home: Column(
-            children: const [
-              Center(
-                child: Text("Loading..."),
-              ),
-              CircularProgressIndicator()
-            ],
-          )); // 초기 로딩 시 Splash Screen
+            home: Column(
+              children: const [
+                Center(
+                  child: Text("Loading..."),
+                ),
+                CircularProgressIndicator()
+              ],
+            ),
+          ); // 초기 로딩 시 Splash Screen
         } else if (snapshot.hasError) {
           return const MaterialApp(
-              home: Center(
-            child: Text("Error!"),
-          )); // 초기 로딩 에러 시 Error Screen
+            home: Center(
+              child: Text("Error!"),
+            ),
+          ); // 초기 로딩 에러 시 Error Screen
         } else {
           return snapshot.data;
         }
@@ -51,19 +53,27 @@ class _AppState extends State<App> {
     );
   }
 }
+
 class Init {
   Init._();
 
   static final instance = Init._();
 
   Future<Widget?> initialize(BuildContext context) async {
-    // stateful widget rebuild 특징상 2번 호출되는 문제 
+    // stateful widget rebuild 특징상 2번 호출되는 문제
     await Future.delayed(const Duration(milliseconds: 1000));
     return MaterialApp(
       title: '서울로봇고 문인우의 포트폴리오',
       debugShowCheckedModeBanner: false,
       onGenerateRoute: Application.router.generator,
-      home: const HomePage(),
+      home: Column(
+        children: const [
+          Expanded(
+            child: HomePage(),
+          ),
+          // 제작중: 스크롤바
+        ],
+      ),
     ); // 초기 로딩 완료 시 띄울 앱 첫 화면
   }
 }
