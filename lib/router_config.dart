@@ -8,7 +8,7 @@ var homePageHandler = Handler(
 });
 
 class Routes {
-  static String homePageRoute = '/';
+  static String homePageRoute = '/4654';
 
   static void configureRoutes(FluroRouter router) {
     router.notFoundHandler = Handler(
@@ -17,6 +17,6 @@ class Routes {
       return;
     });
     router.define(homePageRoute,
-        handler: homePageHandler, transitionDuration: Duration(seconds: 0));
+        handler: homePageHandler, transitionDuration: const Duration(seconds: 0));
   }
 }
