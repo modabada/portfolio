@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
 import 'package:portfolio/Component/Home/homepage.dart';
-import 'router_config.dart';
-import 'router.dart';
+import 'package:portfolio/router_config.dart';
+import 'package:portfolio/router.dart';
 
 void main() async {
   final router = FluroRouter();
