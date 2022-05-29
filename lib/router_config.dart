@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
-import 'Component/Home/homePage.dart';
+import 'package:portfolio/router.dart';
+import 'package:portfolio/Component/Home/homepage.dart';
 
 var homePageHandler = Handler(
     handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
@@ -8,7 +9,6 @@ var homePageHandler = Handler(
 });
 
 class Routes {
-  static String homePageRoute = '/4654';
 
   static void configureRoutes(FluroRouter router) {
     router.notFoundHandler = Handler(
