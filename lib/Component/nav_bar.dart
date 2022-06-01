@@ -21,15 +21,6 @@ class NavBarState extends State<NavBar> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          AnimatedElement(
-            width: widgetHeight,
-            element: Image.asset(
-              "lib/Assets/Image/Home.png",
-              color: Colors.black,
-              width: widgetHeight,
-            ),
-            navigatePath: homePageRoute,
-          ),
           Draggable<int>(
             data: 0,
             childWhenDragging: Image.asset(
@@ -49,36 +40,47 @@ class NavBarState extends State<NavBar> {
               height: widgetHeight,
             ),
           ),
-          Expanded(
-            child: AnimatedElement(
+          const Expanded(
+            child: SizedBox(),
+          ),
+          AnimatedElement(
+            width: widgetHeight,
+            element: Image.asset(
+              "lib/Assets/Image/Home.png",
+              color: Colors.black,
               width: widgetHeight,
-              element: Container(
-                height: widgetHeight,
-                alignment: Alignment.bottomLeft,
-                child: Center(child: Text("school")),
-              ),
-              navigatePath: homePageRoute,
             ),
-          ),Expanded(
-            child: AnimatedElement(
-              width: widgetHeight,
-              element: Container(
-                height: widgetHeight,
-                alignment: Alignment.bottomLeft,
-                child: Center(child: Text("school")),
-              ),
-              navigatePath: homePageRoute,
+            navigatePath: homePageRoute,
+          ),
+          AnimatedElement(
+            width: widgetHeight * 2,
+            element: Container(
+              width: widgetHeight * 2,
+              height: widgetHeight,
+              alignment: Alignment.bottomLeft,
+              child: Center(child: Text("school")),
             ),
-          ),Expanded(
-            child: AnimatedElement(
-              width: widgetHeight,
-              element: Container(
-                height: widgetHeight,
-                alignment: Alignment.bottomLeft,
-                child: Center(child: Text("school")),
-              ),
-              navigatePath: homePageRoute,
+            navigatePath: homePageRoute,
+          ),
+          AnimatedElement(
+            width: widgetHeight * 2,
+            element: Container(
+              width: widgetHeight * 2,
+              height: widgetHeight,
+              alignment: Alignment.bottomLeft,
+              child: Center(child: Text("resume")),
             ),
+            navigatePath: homePageRoute,
+          ),
+          AnimatedElement(
+            width: widgetHeight * 2,
+            element: Container(
+              width: widgetHeight * 2,
+              height: widgetHeight,
+              alignment: Alignment.bottomLeft,
+              child: Center(child: Text("award")),
+            ),
+            navigatePath: homePageRoute,
           ),
         ],
       ),
@@ -120,7 +122,6 @@ class AnimatedElementState extends State<AnimatedElement>
     );
 
     _widthAnimation.addListener(() {
-      print(true);
       setState(() {});
     });
   }
@@ -144,7 +145,7 @@ class AnimatedElementState extends State<AnimatedElement>
                       borderRadius: BorderRadius.all(Radius.elliptical(5, 5))),
                   height: 5,
                   width: _widthAnimation.value,
-                )
+                ),
               ],
             ),
           ),
