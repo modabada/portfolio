@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/router.dart';
 
-const widgetPadding = EdgeInsets.all(10);
+class Images {
+  void load() {
+    locator = Image.asset("lib/Assets/Image/Home.png");
+    locatorWhenDrag = Image.asset(
+      "lib/Assets/Image/Home.png",
+      color: const Color.fromARGB(50, 0, 0, 0),
+    );
+    home = Image.asset("lib/Assets/Image/Home.png", color: Colors.black);
+  }
+
+  late Image locator;
+  late Image locatorWhenDrag;
+  late Image home;
+}
 
 class NavBar extends StatefulWidget {
   const NavBar({Key? key}) : super(key: key);
@@ -11,6 +24,15 @@ class NavBar extends StatefulWidget {
 }
 
 class NavBarState extends State<NavBar> {
+  late Images images;
+
+  @override
+  void initState() {
+    super.initState();
+    images = Images();
+    images.load();
+  }
+
   @override
   Widget build(BuildContext context) {
     double widgetHeight = MediaQuery.of(context).size.height * 0.1;
@@ -23,63 +45,66 @@ class NavBarState extends State<NavBar> {
         children: [
           Draggable<int>(
             data: 0,
-            childWhenDragging: Image.asset(
-              "lib/Assets/Image/Home.png",
+            childWhenDragging: SizedBox(
               width: widgetHeight,
               height: widgetHeight,
-              color: const Color.fromARGB(50, 0, 0, 0),
+              child: images.locatorWhenDrag,
             ),
-            feedback: Image.asset(
-              "lib/Assets/Image/Home.png",
+            feedback: SizedBox(
               width: widgetHeight,
               height: widgetHeight,
+              child: images.locator,
             ),
-            child: Image.asset(
-              "lib/Assets/Image/Home.png",
+            child: SizedBox(
               width: widgetHeight,
               height: widgetHeight,
+              child: images.locator,
             ),
           ),
           const Expanded(
             child: SizedBox(),
           ),
+          const Text("왼쪽 아이콘을 이동하고싶은 아이콘으로 드래그하세요"),
+          const Expanded(
+            child: SizedBox(),
+          ),
           AnimatedElement(
             width: widgetHeight,
-            element: Image.asset(
-              "lib/Assets/Image/Home.png",
-              color: Colors.black,
+            element: SizedBox(
               width: widgetHeight,
+              height: widgetHeight,
+              child: images.home,
+            ),
+            customElement: SizedBox(
+              width: widgetHeight,
+              height: widgetHeight,
+              child: images.home,
             ),
             navigatePath: homePageRoute,
           ),
           AnimatedElement(
             width: widgetHeight * 2,
-            element: Container(
-              width: widgetHeight * 2,
-              height: widgetHeight,
-              alignment: Alignment.bottomLeft,
-              child: Center(child: Text("school")),
-            ),
+            element: const Text("About"),
             navigatePath: homePageRoute,
           ),
           AnimatedElement(
             width: widgetHeight * 2,
-            element: Container(
-              width: widgetHeight * 2,
-              height: widgetHeight,
-              alignment: Alignment.bottomLeft,
-              child: Center(child: Text("resume")),
-            ),
+            element: const Text("What i did"),
             navigatePath: homePageRoute,
           ),
           AnimatedElement(
             width: widgetHeight * 2,
-            element: Container(
-              width: widgetHeight * 2,
-              height: widgetHeight,
-              alignment: Alignment.bottomLeft,
-              child: Center(child: Text("award")),
-            ),
+            element: const Text("Projects"),
+            navigatePath: homePageRoute,
+          ),
+          AnimatedElement(
+            width: widgetHeight * 2,
+            element: const Text("Award"),
+            navigatePath: homePageRoute,
+          ),
+          AnimatedElement(
+            width: widgetHeight * 2,
+            element: const Text("Resume"),
             navigatePath: homePageRoute,
           ),
         ],
@@ -93,11 +118,13 @@ class AnimatedElement extends StatefulWidget {
       {Key? key,
       required this.width,
       required this.element,
-      required this.navigatePath})
+      required this.navigatePath,
+      this.customElement})
       : super(key: key);
   final double width;
   final Widget element;
   final String navigatePath;
+  final Widget? customElement;
 
   @override
   State<AnimatedElement> createState() => AnimatedElementState();
@@ -134,11 +161,18 @@ class AnimatedElementState extends State<AnimatedElement>
         return Container(
           color: widgetColor,
           child: Padding(
-            padding: widgetPadding.copyWith(top: 0, bottom: 0),
+            // padding: widgetPadding.copyWith(top: 0, bottom: 0),
+            padding: const EdgeInsets.only(left: 10, right: 10),
             child: Stack(
               alignment: Alignment.bottomLeft,
               children: [
-                widget.element,
+                widget.customElement ??
+                    Container(
+                      width: widget.width,
+                      height: widget.width / 2,
+                      alignment: Alignment.bottomLeft,
+                      child: Center(child: widget.element),
+                    ),
                 Container(
                   decoration: const BoxDecoration(
                       color: Colors.blue,
@@ -151,16 +185,16 @@ class AnimatedElementState extends State<AnimatedElement>
           ),
         );
       },
-      onWillAccept: (a) {
+      onWillAccept: (data) {
         widgetColor = const Color.fromARGB(50, 0, 0, 0);
         _controller.forward();
         return true;
       },
-      onAccept: (a) {
+      onAccept: (data) {
         widgetColor = const Color.fromARGB(0, 0, 0, 0);
         Application.router.navigateTo(context, widget.navigatePath);
       },
-      onLeave: (a) {
+      onLeave: (data) {
         widgetColor = const Color.fromARGB(0, 0, 0, 0);
         _controller.reverse();
       },
