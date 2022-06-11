@@ -8,7 +8,10 @@ class Images {
       "lib/Assets/Image/Home.png",
       color: const Color.fromARGB(50, 0, 0, 0),
     );
-    home = Image.asset("lib/Assets/Image/Home.png", color: Colors.black);
+    home = Image.asset(
+      "lib/Assets/Image/Home.png",
+      color: const Color.fromARGB(255, 50, 50, 200),
+    );
   }
 
   late Image locator;
@@ -17,7 +20,8 @@ class Images {
 }
 
 class NavBar extends StatefulWidget {
-  const NavBar({Key? key}) : super(key: key);
+  const NavBar({Key? key, required this.widgetSize}) : super(key: key);
+  final double widgetSize;
 
   @override
   State<NavBar> createState() => NavBarState();
@@ -35,80 +39,75 @@ class NavBarState extends State<NavBar> {
 
   @override
   Widget build(BuildContext context) {
-    double widgetHeight = MediaQuery.of(context).size.height * 0.1;
-
     return Material(
       color: const Color.fromARGB(50, 0, 0, 0),
-      textStyle: const TextStyle(fontSize: 24),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Draggable<int>(
-            data: 0,
-            childWhenDragging: SizedBox(
-              width: widgetHeight,
-              height: widgetHeight,
-              child: images.locatorWhenDrag,
-            ),
-            feedback: SizedBox(
-              width: widgetHeight,
-              height: widgetHeight,
-              child: images.locator,
-            ),
-            child: SizedBox(
-              width: widgetHeight,
-              height: widgetHeight,
-              child: images.locator,
-            ),
-          ),
-          const Expanded(
-            child: SizedBox(),
-          ),
-          const Text("왼쪽 아이콘을 이동하고싶은 아이콘으로 드래그하세요"),
-          const Expanded(
-            child: SizedBox(),
-          ),
-          AnimatedElement(
-            width: widgetHeight,
-            element: SizedBox(
-              width: widgetHeight,
-              height: widgetHeight,
-              child: images.home,
-            ),
-            customElement: SizedBox(
-              width: widgetHeight,
-              height: widgetHeight,
-              child: images.home,
-            ),
-            navigatePath: homePageRoute,
-          ),
-          AnimatedElement(
-            width: widgetHeight * 2,
-            element: const Text("About"),
-            navigatePath: homePageRoute,
-          ),
-          AnimatedElement(
-            width: widgetHeight * 2,
-            element: const Text("What i did"),
-            navigatePath: homePageRoute,
-          ),
-          AnimatedElement(
-            width: widgetHeight * 2,
-            element: const Text("Projects"),
-            navigatePath: homePageRoute,
-          ),
-          AnimatedElement(
-            width: widgetHeight * 2,
-            element: const Text("Award"),
-            navigatePath: homePageRoute,
-          ),
-          AnimatedElement(
-            width: widgetHeight * 2,
-            element: const Text("Resume"),
-            navigatePath: homePageRoute,
-          ),
-        ],
-      ),
+      textStyle: const TextStyle(fontSize: 24, color: Colors.white),
+      child: SizedBox(
+          height: widget.widgetSize,
+          child: ListView(
+            scrollDirection: Axis.horizontal,
+            children: [
+              Row(
+                children: [
+                  Draggable<int>(
+                    data: 0,
+                    childWhenDragging: SizedBox(
+                      width: widget.widgetSize,
+                      child: images.locatorWhenDrag,
+                    ),
+                    feedback: SizedBox(
+                      width: widget.widgetSize,
+                      child: images.locator,
+                    ),
+                    child: SizedBox(
+                      width: widget.widgetSize,
+                      child: images.locator,
+                    ),
+                  ),
+                  Container(
+                    width: widget.widgetSize * 4,
+                    alignment: Alignment.center,
+                    child: const Text("왼쪽 아이콘을 이동하고싶은\n아이콘으로 드래그하세요"),
+                  ),
+                  AnimatedElement(
+                    width: widget.widgetSize,
+                    element: SizedBox(
+                      child: images.home,
+                    ),
+                    customElement: SizedBox(
+                      child: images.home,
+                    ),
+                    navigatePath: homePageRoute,
+                  ),
+                  AnimatedElement(
+                    width: widget.widgetSize * 2,
+                    element: const Text("About"),
+                    navigatePath: homePageRoute,
+                  ),
+                  AnimatedElement(
+                    width: widget.widgetSize * 2,
+                    element: const Text("What i did"),
+                    navigatePath: homePageRoute,
+                  ),
+                  AnimatedElement(
+                    width: widget.widgetSize * 2,
+                    element: const Text("Projects"),
+                    navigatePath: homePageRoute,
+                  ),
+                  AnimatedElement(
+                    width: widget.widgetSize * 2,
+                    element: const Text("Award"),
+                    navigatePath: homePageRoute,
+                  ),
+                  AnimatedElement(
+                    width: widget.widgetSize * 2,
+                    element: const Text("Resume"),
+                    navigatePath: homePageRoute,
+                  ),
+                ],
+              ),
+            ],
+          )),
     );
   }
 }
