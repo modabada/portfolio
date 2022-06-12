@@ -2,14 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/router.dart';
 
 class Images {
-  void load() {
+  void load(double size) {
     locator = Image.asset("lib/Assets/Image/Home.png");
     locatorWhenDrag = Image.asset(
       "lib/Assets/Image/Home.png",
+      height: size,
       color: const Color.fromARGB(50, 0, 0, 0),
     );
     home = Image.asset(
       "lib/Assets/Image/Home.png",
+      height: size,
+      width: size,
       color: const Color.fromARGB(255, 50, 50, 200),
     );
   }
@@ -34,7 +37,7 @@ class NavBarState extends State<NavBar> {
   void initState() {
     super.initState();
     images = Images();
-    images.load();
+    images.load(widget.widgetSize);
   }
 
   @override
@@ -43,71 +46,75 @@ class NavBarState extends State<NavBar> {
       color: const Color.fromARGB(50, 0, 0, 0),
       textStyle: const TextStyle(fontSize: 24, color: Colors.white),
       child: SizedBox(
-          height: widget.widgetSize,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: [
-              Row(
-                children: [
-                  Draggable<int>(
-                    data: 0,
-                    childWhenDragging: SizedBox(
-                      width: widget.widgetSize,
-                      child: images.locatorWhenDrag,
-                    ),
-                    feedback: SizedBox(
-                      width: widget.widgetSize,
-                      child: images.locator,
-                    ),
-                    child: SizedBox(
-                      width: widget.widgetSize,
-                      child: images.locator,
-                    ),
-                  ),
-                  Container(
-                    width: widget.widgetSize * 4,
-                    alignment: Alignment.center,
-                    child: const Text("왼쪽 아이콘을 이동하고싶은\n아이콘으로 드래그하세요"),
-                  ),
-                  AnimatedElement(
+        height: widget.widgetSize,
+        child: ListView(
+          scrollDirection: Axis.horizontal,
+          children: [
+            Row(
+              children: [
+                Draggable<int>(
+                  data: 0,
+                  childWhenDragging: SizedBox(
                     width: widget.widgetSize,
-                    element: SizedBox(
-                      child: images.home,
-                    ),
-                    customElement: SizedBox(
-                      child: images.home,
-                    ),
-                    navigatePath: homePageRoute,
+                    child: images.locatorWhenDrag,
                   ),
-                  AnimatedElement(
-                    width: widget.widgetSize * 2,
-                    element: const Text("About"),
-                    navigatePath: homePageRoute,
+                  feedback: SizedBox(
+                    width: widget.widgetSize,
+                    child: images.locator,
                   ),
-                  AnimatedElement(
-                    width: widget.widgetSize * 2,
-                    element: const Text("What i did"),
-                    navigatePath: homePageRoute,
+                  child: SizedBox(
+                    width: widget.widgetSize,
+                    child: images.locator,
                   ),
-                  AnimatedElement(
-                    width: widget.widgetSize * 2,
-                    element: const Text("Projects"),
-                    navigatePath: homePageRoute,
+                ),
+                SizedBox(
+                  width: widget.widgetSize * 4,
+                  child: const Text(
+                    "왼쪽 아이콘을 이동하고싶은\n아이콘으로 드래그하세요",
+                    textAlign: TextAlign.center,
+                    softWrap: false,
                   ),
-                  AnimatedElement(
-                    width: widget.widgetSize * 2,
-                    element: const Text("Award"),
-                    navigatePath: homePageRoute,
+                ),
+                AnimatedElement(
+                  width: widget.widgetSize,
+                  element: SizedBox(
+                    child: images.home,
                   ),
-                  AnimatedElement(
-                    width: widget.widgetSize * 2,
-                    element: const Text("Resume"),
-                    navigatePath: homePageRoute,
+                  customElement: SizedBox(
+                    child: images.home,
                   ),
-                ],
-              ),
-            ],
-          )),
+                  navigatePath: homePageRoute,
+                ),
+                AnimatedElement(
+                  width: widget.widgetSize * 2,
+                  element: const Text("About"),
+                  navigatePath: aboutPageRoute,
+                ),
+                AnimatedElement(
+                  width: widget.widgetSize * 2,
+                  element: const Text("What i did"),
+                  navigatePath: homePageRoute,
+                ),
+                AnimatedElement(
+                  width: widget.widgetSize * 2,
+                  element: const Text("Projects"),
+                  navigatePath: homePageRoute,
+                ),
+                AnimatedElement(
+                  width: widget.widgetSize * 2,
+                  element: const Text("Award"),
+                  navigatePath: homePageRoute,
+                ),
+                AnimatedElement(
+                  width: widget.widgetSize * 2,
+                  element: const Text("Resume"),
+                  navigatePath: homePageRoute,
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -159,28 +166,24 @@ class AnimatedElementState extends State<AnimatedElement>
           List<dynamic> rejectedData) {
         return Container(
           color: widgetColor,
-          child: Padding(
-            // padding: widgetPadding.copyWith(top: 0, bottom: 0),
-            padding: const EdgeInsets.only(left: 10, right: 10),
-            child: Stack(
-              alignment: Alignment.bottomLeft,
-              children: [
-                widget.customElement ??
-                    Container(
-                      width: widget.width,
-                      height: widget.width / 2,
-                      alignment: Alignment.bottomLeft,
-                      child: Center(child: widget.element),
-                    ),
-                Container(
-                  decoration: const BoxDecoration(
-                      color: Colors.blue,
-                      borderRadius: BorderRadius.all(Radius.elliptical(5, 5))),
-                  height: 5,
-                  width: _widthAnimation.value,
-                ),
-              ],
-            ),
+          child: Stack(
+            alignment: Alignment.bottomLeft,
+            children: [
+              widget.customElement ??
+                  Container(
+                    width: widget.width,
+                    height: widget.width / 2,
+                    alignment: Alignment.bottomLeft,
+                    child: Center(child: widget.element),
+                  ),
+              Container(
+                decoration: const BoxDecoration(
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.all(Radius.elliptical(5, 5))),
+                height: 5,
+                width: _widthAnimation.value,
+              ),
+            ],
           ),
         );
       },
