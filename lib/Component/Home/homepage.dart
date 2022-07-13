@@ -33,10 +33,7 @@ class HomePage extends StatelessWidget {
                 ),
                 ListView(
                   children: [
-                    const Padding(
-                      padding: EdgeInsetsDirectional.only(top: 96),
-                      child: MyBanner(),
-                    ),
+                    const MyBanner(),
                     SizedBox(
                       height: 600,
                       child: Padding(
@@ -54,14 +51,20 @@ class HomePage extends StatelessWidget {
                                     text: "안녕하세요?\n\n",
                                     style: TextStyle(
                                         fontSize: 48, color: Colors.lightBlue)),
-                                TextSpan(text: "저는 소프트웨어로 프로그램을 만드는 일을 좋아하고 그에 따라, 최소한은 알고 있다고 생각합니다\n\n"),
+                                TextSpan(
+                                    text:
+                                        "저는 소프트웨어로 프로그램을 만드는 일을 좋아하고 그에 따라, 최소한은 알고 있다고 생각합니다\n\n"),
                                 TextSpan(text: "저는 "),
                                 TextSpan(text: "Python, C#", style: accent),
                                 TextSpan(text: "과 같이 현대적인 언어에 비교적 익숙합니다\n\n"),
                                 TextSpan(text: "저는 "),
-                                TextSpan(text: "어플리케이션 제작, DBA, 게임", style: accent),
+                                TextSpan(
+                                    text: "어플리케이션 제작, DBA, 백엔드, 게임",
+                                    style: accent),
                                 TextSpan(text: "등에 관심있으며\n"),
-                                TextSpan(text: "웹 프론트엔드, 게임, 어플리케이션, 간단한 AI", style: accent),
+                                TextSpan(
+                                    text: "웹 프론트엔드, 게임, 어플리케이션, 간단한 AI",
+                                    style: accent),
                                 TextSpan(text: "등을 만들어본 경험이 있습니다")
                               ],
                             ),
@@ -75,19 +78,36 @@ class HomePage extends StatelessWidget {
                         child: RichText(
                           softWrap: false,
                           text: TextSpan(
-                            style: const TextStyle(fontSize: 16, color: Colors.white),
+                            style: const TextStyle(
+                                fontSize: 16, color: Colors.white),
                             children: [
                               const TextSpan(
                                 text: "FIND ME ON\n",
                                 style: TextStyle(
                                     fontSize: 36, color: Colors.lightBlue),
                               ),
-                              const WidgetSpan(child: Icon(Icons.call, color: Colors.white,)),
+                              const WidgetSpan(
+                                child: Icon(
+                                  Icons.call,
+                                  color: Colors.white,
+                                ),
+                              ),
                               const TextSpan(text: " 010-9297-9467\n"),
-                              const WidgetSpan(child: Icon(Icons.mail, color: Colors.white,)),
+                              const WidgetSpan(
+                                child: Icon(
+                                  Icons.mail,
+                                  color: Colors.white,
+                                ),
+                              ),
                               const TextSpan(text: " miw1102@naver.com\n"),
-                              WidgetSpan(child: Image.asset("lib/Assets/Image/githubIcon.png",  height: 25,)),
-                              const TextSpan(text: " https://github.com/modabada\n"),
+                              WidgetSpan(
+                                child: Image.asset(
+                                  "lib/Assets/Image/githubIcon.png",
+                                  height: 25,
+                                ),
+                              ),
+                              const TextSpan(
+                                  text: " https://github.com/modabada\n"),
                             ],
                           ),
                         ),
@@ -98,7 +118,7 @@ class HomePage extends StatelessWidget {
               ],
             ),
           ),
-          const NavBar(widgetSize: 96),
+          const NavBar(),
         ],
       ),
     );

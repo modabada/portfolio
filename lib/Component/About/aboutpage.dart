@@ -35,8 +35,7 @@ class AboutPage extends StatelessWidget {
                       padding: EdgeInsets.only(top: 96),
                       child: Text(
                         "About page 제작중",
-                        style:
-                            TextStyle(fontSize: 76, color: Colors.white),
+                        style: TextStyle(fontSize: 76, color: Colors.white),
                       ),
                     )
                   ],
@@ -44,7 +43,7 @@ class AboutPage extends StatelessWidget {
               ],
             ),
           ),
-          const NavBar(widgetSize: 96),
+          const NavBar(),
         ],
       ),
     );

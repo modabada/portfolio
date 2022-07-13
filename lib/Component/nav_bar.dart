@@ -23,8 +23,8 @@ class Images {
 }
 
 class NavBar extends StatefulWidget {
-  const NavBar({Key? key, required this.widgetSize}) : super(key: key);
-  final double widgetSize;
+  const NavBar({Key? key}) : super(key: key);
+  final double widgetHeight = 96;
 
   @override
   State<NavBar> createState() => NavBarState();
@@ -37,46 +37,53 @@ class NavBarState extends State<NavBar> {
   void initState() {
     super.initState();
     images = Images();
-    images.load(widget.widgetSize);
+    images.load(widget.widgetHeight);
   }
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: const Color.fromARGB(50, 0, 0, 0),
+      color: const Color.fromARGB(100, 0, 0, 0),
       textStyle: const TextStyle(fontSize: 24, color: Colors.white),
-      child: SizedBox(
-        height: widget.widgetSize,
-        child: ListView(
-          scrollDirection: Axis.horizontal,
-          children: [
-            Row(
-              children: [
-                Draggable<int>(
+      child: Container(
+        height: 180,
+        alignment: Alignment.centerLeft,
+        child: RichText(
+          overflow: TextOverflow.visible,
+          maxLines: 2,
+          text: TextSpan(
+            children: [
+              WidgetSpan(
+                child: Draggable<int>(
                   data: 0,
                   childWhenDragging: SizedBox(
-                    width: widget.widgetSize,
+                    width: widget.widgetHeight,
                     child: images.locatorWhenDrag,
                   ),
                   feedback: SizedBox(
-                    width: widget.widgetSize,
+                    width: widget.widgetHeight,
                     child: images.locator,
                   ),
                   child: SizedBox(
-                    width: widget.widgetSize,
+                    width: widget.widgetHeight,
                     child: images.locator,
                   ),
                 ),
-                SizedBox(
-                  width: widget.widgetSize * 4,
+              ),
+              WidgetSpan(
+                alignment: PlaceholderAlignment.bottom,
+                child: SizedBox(
+                  width: widget.widgetHeight * 4,
                   child: const Text(
                     "왼쪽 아이콘을 이동하고싶은\n아이콘으로 드래그하세요",
                     textAlign: TextAlign.center,
                     softWrap: false,
                   ),
                 ),
-                AnimatedElement(
-                  width: widget.widgetSize,
+              ),
+              WidgetSpan(
+                child: AnimatedElement(
+                  width: widget.widgetHeight,
                   element: SizedBox(
                     child: images.home,
                   ),
@@ -85,34 +92,44 @@ class NavBarState extends State<NavBar> {
                   ),
                   navigatePath: homePageRoute,
                 ),
-                AnimatedElement(
-                  width: widget.widgetSize * 2,
+              ),
+              WidgetSpan(
+                child: AnimatedElement(
+                  width: widget.widgetHeight * 2,
                   element: const Text("About"),
                   navigatePath: aboutPageRoute,
                 ),
-                AnimatedElement(
-                  width: widget.widgetSize * 2,
-                  element: const Text("What i did"),
+              ),
+              WidgetSpan(
+                child: AnimatedElement(
+                  width: widget.widgetHeight * 2,
+                  element: const Text("School"),
                   navigatePath: homePageRoute,
                 ),
-                AnimatedElement(
-                  width: widget.widgetSize * 2,
+              ),
+              WidgetSpan(
+                child: AnimatedElement(
+                  width: widget.widgetHeight * 2,
                   element: const Text("Projects"),
                   navigatePath: homePageRoute,
                 ),
-                AnimatedElement(
-                  width: widget.widgetSize * 2,
+              ),
+              WidgetSpan(
+                child: AnimatedElement(
+                  width: widget.widgetHeight * 2,
                   element: const Text("Award"),
                   navigatePath: homePageRoute,
                 ),
-                AnimatedElement(
-                  width: widget.widgetSize * 2,
+              ),
+              WidgetSpan(
+                child: AnimatedElement(
+                  width: widget.widgetHeight * 2,
                   element: const Text("Resume"),
                   navigatePath: homePageRoute,
                 ),
-              ],
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
       ),
     );
