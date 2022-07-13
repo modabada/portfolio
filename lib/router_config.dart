@@ -3,6 +3,7 @@ import 'package:fluro/fluro.dart';
 import 'package:portfolio/router.dart';
 import 'package:portfolio/Component/Home/homepage.dart';
 import 'package:portfolio/Component/About/aboutpage.dart';
+import 'package:portfolio/Component/School/schoolpage.dart';
 
 var homePageHandler = Handler(
   handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
@@ -14,6 +15,11 @@ var aboutPageHandler = Handler(
     return const AboutPage();
   },
 );
+var schoolPageHandler = Handler(
+  handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
+    return const SchoolPage();
+  },
+);
 
 class Routes {
   static void configureRoutes(FluroRouter router) {
@@ -23,11 +29,20 @@ class Routes {
         return;
       },
     );
-    router.define(homePageRoute,
-        handler: homePageHandler,
-        transitionDuration: const Duration(seconds: 0));
-    router.define(aboutPageRoute,
-        handler: aboutPageHandler,
-        transitionDuration: const Duration(seconds: 0));
+    router.define(
+      homePageRoute,
+      handler: homePageHandler,
+      transitionType: TransitionType.fadeIn,
+    );
+    router.define(
+      aboutPageRoute,
+      handler: aboutPageHandler,
+      transitionType: TransitionType.fadeIn,
+    );
+    router.define(
+      schoolPageRoute,
+      handler: schoolPageHandler,
+      transitionType: TransitionType.fadeIn,
+    );
   }
 }
