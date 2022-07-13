@@ -104,7 +104,7 @@ class NavBarState extends State<NavBar> {
                 child: AnimatedElement(
                   width: widget.widgetHeight * 2,
                   element: const Text("School"),
-                  navigatePath: homePageRoute,
+                  navigatePath: schoolPageRoute,
                 ),
               ),
               WidgetSpan(
