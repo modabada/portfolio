@@ -1,43 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/router.dart';
 
-class Images {
-  void load(double size) {
-    locator = Image.asset("lib/Assets/Image/Home.png");
-    locatorWhenDrag = Image.asset(
-      "lib/Assets/Image/Home.png",
-      height: size,
-      color: const Color.fromARGB(50, 0, 0, 0),
-    );
-    home = Image.asset(
-      "lib/Assets/Image/Home.png",
-      height: size,
-      width: size,
-      color: const Color.fromARGB(255, 50, 50, 200),
-    );
-  }
-
-  late Image locator;
-  late Image locatorWhenDrag;
-  late Image home;
-}
-
 class NavBar extends StatefulWidget {
   const NavBar({Key? key}) : super(key: key);
-  final double widgetHeight = 96;
+  final double widgetHeight = 90;
 
   @override
   State<NavBar> createState() => NavBarState();
 }
 
 class NavBarState extends State<NavBar> {
-  late Images images;
+  late final Map<String, Widget> images;
 
   @override
   void initState() {
     super.initState();
-    images = Images();
-    images.load(widget.widgetHeight);
+    images = {
+      "locator": Icon(
+        Icons.location_on,
+        size: widget.widgetHeight,
+        color: Colors.lightBlue,
+      ),
+      "locator_drag": Icon(
+        Icons.location_on_outlined,
+        size: widget.widgetHeight,
+        color: const Color.fromARGB(50, 255, 255, 255),
+      ),
+      "home": Icon(
+        Icons.home_rounded,
+        size: widget.widgetHeight,
+        color: const Color.fromARGB(255, 50, 50, 200),
+      )
+    };
   }
 
   @override
@@ -46,8 +40,8 @@ class NavBarState extends State<NavBar> {
       color: const Color.fromARGB(100, 0, 0, 0),
       textStyle: const TextStyle(fontSize: 24, color: Colors.white),
       child: Container(
-        height: 180,
-        alignment: Alignment.centerLeft,
+        height: widget.widgetHeight * 2 + 20,
+        alignment: Alignment.topLeft,
         child: RichText(
           overflow: TextOverflow.visible,
           maxLines: 2,
@@ -58,15 +52,15 @@ class NavBarState extends State<NavBar> {
                   data: 0,
                   childWhenDragging: SizedBox(
                     width: widget.widgetHeight,
-                    child: images.locatorWhenDrag,
+                    child: images["locator_drag"],
                   ),
                   feedback: SizedBox(
                     width: widget.widgetHeight,
-                    child: images.locator,
+                    child: images["locator"],
                   ),
                   child: SizedBox(
                     width: widget.widgetHeight,
-                    child: images.locator,
+                    child: images["locator"],
                   ),
                 ),
               ),
@@ -85,10 +79,10 @@ class NavBarState extends State<NavBar> {
                 child: AnimatedElement(
                   width: widget.widgetHeight,
                   element: SizedBox(
-                    child: images.home,
+                    child: images["home"],
                   ),
                   customElement: SizedBox(
-                    child: images.home,
+                    child: images["home"],
                   ),
                   navigatePath: homePageRoute,
                 ),
@@ -155,25 +149,23 @@ class AnimatedElement extends StatefulWidget {
 
 class AnimatedElementState extends State<AnimatedElement>
     with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _widthAnimation;
-  Color widgetColor = const Color.fromARGB(0, 0, 0, 0);
+  late final AnimationController _controller;
+  late final Animation<double> _widthAnimation;
+  Color _widgetColor = const Color.fromARGB(0, 0, 0, 0);
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 200),
     );
 
     _widthAnimation = Tween<double>(begin: 0, end: widget.width).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeIn),
     );
 
-    _widthAnimation.addListener(() {
-      setState(() {});
-    });
+    _widthAnimation.addListener(() => setState(() {}));
   }
 
   @override
@@ -182,7 +174,10 @@ class AnimatedElementState extends State<AnimatedElement>
       builder: (BuildContext context, List<dynamic> candidateData,
           List<dynamic> rejectedData) {
         return Container(
-          color: widgetColor,
+          decoration: BoxDecoration(
+            border: Border.all(width: 5, color: _widgetColor),
+            borderRadius: const BorderRadius.all(Radius.elliptical(15, 15)),
+          ),
           child: Stack(
             alignment: Alignment.bottomLeft,
             children: [
@@ -205,16 +200,16 @@ class AnimatedElementState extends State<AnimatedElement>
         );
       },
       onWillAccept: (data) {
-        widgetColor = const Color.fromARGB(50, 0, 0, 0);
+        _widgetColor = const Color.fromARGB(50, 255, 255, 255);
         _controller.forward();
         return true;
       },
       onAccept: (data) {
-        widgetColor = const Color.fromARGB(0, 0, 0, 0);
+        _widgetColor = const Color.fromARGB(0, 0, 0, 0);
         Application.router.navigateTo(context, widget.navigatePath);
       },
       onLeave: (data) {
-        widgetColor = const Color.fromARGB(0, 0, 0, 0);
+        _widgetColor = const Color.fromARGB(0, 0, 0, 0);
         _controller.reverse();
       },
     );
