@@ -9,8 +9,8 @@ class TypingBar extends StatefulWidget {
 
 class _TypingBarState extends State<TypingBar>
     with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<double> _colorAnimation;
+  late final AnimationController _controller;
+  late final Animation<double> _colorAnimation;
 
   @override
   void initState() {
@@ -35,7 +35,7 @@ class _TypingBarState extends State<TypingBar>
     return Container(
       width: 4,
       height: 90,
-      color: Color.fromARGB(_colorAnimation.value.round(), 3, 169, 244),
+      color: Colors.lightBlue.withAlpha(_colorAnimation.value.round() + 0),
     );
   }
 
