@@ -4,21 +4,12 @@ import 'package:portfolio/Component/Home/intro_text.dart';
 class MyBanner extends StatelessWidget {
   const MyBanner({Key? key}) : super(key: key);
 
-  static final ClipOval _photo = ClipOval(
-    clipper: PhotoClipper(),
-    child: Image.asset(
-      "lib/Assets/Image/IDPhoto.png",
-      height: 500,
-      width: 372,
-      colorBlendMode: BlendMode.clear,
-    ),
-  );
   final TextStyle _textStyle =
       const TextStyle(fontSize: 48, color: Colors.white);
 
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
+    final Size screenSize = MediaQuery.of(context).size;
     return Container(
       height: 896,
       color: const Color.fromARGB(50, 0, 0, 0),
@@ -57,7 +48,15 @@ class MyBanner extends StatelessWidget {
                 padding: EdgeInsets.only(
                   right: screenSize.width * 0.15,
                 ),
-                child: _photo,
+                child: ClipOval(
+                  clipper: PhotoClipper(),
+                  child: Image.asset(
+                    "lib/Assets/Image/IDPhoto.png",
+                    height: 500,
+                    width: 372,
+                    colorBlendMode: BlendMode.clear,
+                  ),
+                ),
               ),
             ],
           ),
