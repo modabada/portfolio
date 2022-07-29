@@ -4,15 +4,17 @@ import 'package:portfolio/Component/Home/intro_text.dart';
 class MyBanner extends StatelessWidget {
   const MyBanner({Key? key}) : super(key: key);
 
-  final TextStyle _textStyle =
-      const TextStyle(fontSize: 48, color: Colors.white);
+  final TextStyle _textStyle = const TextStyle(
+    fontSize: 48,
+    color: Colors.white,
+  );
 
   @override
   Widget build(BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
     return Container(
       height: 896,
-      color: const Color.fromARGB(50, 0, 0, 0),
+      color: Colors.black.withAlpha(50),
       child: Stack(
         children: [
           Image.asset(
@@ -45,16 +47,24 @@ class MyBanner extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(
-                  right: screenSize.width * 0.15,
-                ),
-                child: ClipOval(
-                  clipper: PhotoClipper(),
-                  child: Image.asset(
-                    "lib/Assets/Image/IDPhoto.png",
-                    height: 500,
-                    width: 372,
-                    colorBlendMode: BlendMode.clear,
+                padding: EdgeInsets.only(right: screenSize.width * 0.15),
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(
+                    minWidth: 181.35,
+                    minHeight: 243.74891,
+                  ),
+                  child: Container(
+                    width: screenSize.width * 0.19375,
+                    height: screenSize.width * 0.19375 * 1.34408,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage("lib/Assets/Image/IDPhoto.png"),
+                        fit: BoxFit.cover,
+                      ),
+                      borderRadius: BorderRadius.all(
+                        Radius.elliptical(1000.00, 1344.08),
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -63,17 +73,5 @@ class MyBanner extends StatelessWidget {
         ],
       ),
     );
-  }
-}
-
-class PhotoClipper extends CustomClipper<Rect> {
-  @override
-  Rect getClip(Size size) {
-    return Rect.fromLTWH(0, 0, size.width, size.height);
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Rect> oldClipper) {
-    return true;
   }
 }

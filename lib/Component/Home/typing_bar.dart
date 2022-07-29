@@ -35,7 +35,7 @@ class _TypingBarState extends State<TypingBar>
     return Container(
       width: 4,
       height: 90,
-      color: Colors.lightBlue.withAlpha(_colorAnimation.value.round() + 0),
+      color: Colors.lightBlue.withAlpha(_colorAnimation.value.round()),
     );
   }
 
