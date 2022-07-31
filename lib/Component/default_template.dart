@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/Component/background.dart';
 import 'package:portfolio/Component/mobilepage.dart';
-import 'package:portfolio/Component/nav_bar.dart';
+import 'package:portfolio/Component/NavBar/nav_bar.dart';
 
 const TextStyle textStyle = TextStyle(
   fontSize: 24,
