@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/Component/Home/intro_text.dart';
 
-class MyBanner extends StatelessWidget {
-  const MyBanner({Key? key}) : super(key: key);
+class IntroBanner extends StatelessWidget {
+  const IntroBanner({Key? key}) : super(key: key);
 
   final TextStyle _textStyle = const TextStyle(
     fontSize: 48,

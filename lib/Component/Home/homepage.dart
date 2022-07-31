@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/Component/Home/my_banner.dart';
+import 'package:portfolio/Component/Home/intro_banner.dart';
 import 'package:portfolio/Component/default_template.dart';
 
 class HomePage extends DefaultTemplate {
@@ -9,7 +9,7 @@ class HomePage extends DefaultTemplate {
   Widget body(BuildContext context) {
     return ListView(
       children: [
-        const MyBanner(),
+        const IntroBanner(),
         const SizedBox(
           height: 600,
           child: Center(
