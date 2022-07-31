@@ -3,9 +3,11 @@ import 'package:fluro/fluro.dart';
 import 'package:portfolio/router.dart';
 import 'package:portfolio/Component/errorpage.dart';
 import 'package:portfolio/Component/Home/homepage.dart';
-import 'package:portfolio/Component/mobilepage.dart';
 import 'package:portfolio/Component/About/aboutpage.dart';
 import 'package:portfolio/Component/School/schoolpage.dart';
+import 'package:portfolio/Component/Projects/projects.dart';
+import 'package:portfolio/Component/Award/award.dart';
+import 'package:portfolio/Component/Resume/resume.dart';
 
 final homePageHandler = Handler(
   handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
@@ -22,9 +24,19 @@ final schoolPageHandler = Handler(
     return const SchoolPage();
   },
 );
-final mobilePageHandler = Handler(
+final projectsPageHandler = Handler(
   handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
-    return const MobilePage();
+    return const ProjectsPage();
+  },
+);
+final awardPageHandler = Handler(
+  handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
+    return const AwardPage();
+  },
+);
+final resumePageHandler = Handler(
+  handlerFunc: (BuildContext? context, Map<String, List<String>> params) {
+    return const ResumePage();
   },
 );
 
@@ -51,9 +63,19 @@ class Routes {
       transitionType: TransitionType.fadeIn,
     );
     router.define(
-      mobilePageRoute,
-      handler: mobilePageHandler,
-      transitionDuration: Duration.zero,
+      projectsPageRoute,
+      handler: projectsPageHandler,
+      transitionType: TransitionType.fadeIn,
+    );
+    router.define(
+      awardPageRoute,
+      handler: awardPageHandler,
+      transitionType: TransitionType.fadeIn,
+    );
+    router.define(
+      resumePageRoute,
+      handler: resumePageHandler,
+      transitionType: TransitionType.fadeIn,
     );
   }
 }
