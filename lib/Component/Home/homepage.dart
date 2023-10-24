@@ -24,7 +24,7 @@ class HomePage extends DefaultTemplate {
                   TextSpan(text: "과 같이 현대적인 언어에 비교적 익숙합니다\n\n"),
                   TextSpan(text: "저는 "),
                   TextSpan(text: "어플리케이션 제작, DBA, 백엔드, 게임", style: accent),
-                  TextSpan(text: "등에 관십있으며\n"),
+                  TextSpan(text: "등에 관심이 있으며\n"),
                   TextSpan(
                     text: "웹 프론트엔드, 게임, 어플리케이션, 간단한 AI, 제어시스템",
                     style: accent,
