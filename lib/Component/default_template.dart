@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/Component/background.dart';
-import 'package:portfolio/Component/mobilepage.dart';
 import 'package:portfolio/Component/NavBar/nav_bar.dart';
+import 'package:portfolio/Component/background.dart';
 
 const TextStyle textStyle = TextStyle(
   fontSize: 24,
@@ -29,11 +28,6 @@ abstract class DefaultTemplate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size screenSize = MediaQuery.of(context).size;
-
-    if(screenSize.width < 1024) {
-      return const MobilePage();
-    }
     return Material(
       textStyle: textStyle,
       child: Stack(
