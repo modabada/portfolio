@@ -1,5 +1,6 @@
 # Miscellaneous
 *.class
+*.lock
 *.log
 *.pyc
 *.swp
@@ -33,7 +34,6 @@ migrate_working_dir/
 /build/
 
 # Web related
-lib/generated_plugin_registrant.dart
 
 # Symbolication related
 app.*.symbols
