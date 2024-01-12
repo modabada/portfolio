@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluro/fluro.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:portfolio/Bloc/Theme/theme_bloc.dart';
+import 'package:portfolio/Bloc/Theme/theme_state.dart';
 import 'package:portfolio/router_config.dart';
 import 'package:portfolio/router.dart';
 
@@ -15,10 +18,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "문인우의 포트폴리오",
-      onGenerateRoute: Application.router.generator,
-      initialRoute: homePageRoute,
+    return BlocProvider(
+      create: (context) => ThemeBloc(),
+      child: BlocBuilder<ThemeBloc, ThemeState>(builder: (context, state) {
+        return MaterialApp(
+          theme: state.currentTheme.theme,
+          title: "문인우의 포트폴리오",
+          onGenerateRoute: Application.router.generator,
+          initialRoute: homePageRoute,
+        );
+      }),
     );
   }
 }
