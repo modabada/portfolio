@@ -11,8 +11,11 @@ class LightTheme extends AppTheme {
   LightTheme()
       : super(
           theme: ThemeData(
-            brightness: Brightness.light,
-            colorSchemeSeed: Colors.lightBlue,
+            useMaterial3: true,
+            colorScheme: ColorScheme.fromSeed(
+              seedColor: Colors.lightBlue,
+              brightness: Brightness.light,
+            ),
           ),
         );
 }
@@ -22,8 +25,11 @@ class DarkTheme extends AppTheme {
   DarkTheme()
       : super(
           theme: ThemeData(
-            brightness: Brightness.dark,
-            colorSchemeSeed: Colors.deepPurple,
+            useMaterial3: true,
+            colorScheme: ColorScheme.fromSeed(
+              seedColor: Colors.deepPurple,
+              brightness: Brightness.dark,
+            ),
           ),
         );
 }

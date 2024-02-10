@@ -28,8 +28,8 @@ abstract class DefaultTemplate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      textStyle: textStyle,
+    return DefaultTextStyle(
+      style: Theme.of(context).textTheme.labelMedium!,
       child: Stack(
         children: [
           const Background(),
