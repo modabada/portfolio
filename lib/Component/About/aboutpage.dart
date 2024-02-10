@@ -3,28 +3,36 @@ import 'package:portfolio/Component/default_template.dart';
 import 'package:portfolio/Component/About/greeting_banner.dart';
 import 'package:portfolio/Component/About/tech_element.dart';
 
+
+const TextStyle large = TextStyle(
+  fontSize: 48,
+);
+
 class AboutPage extends DefaultTemplate {
   const AboutPage({Key? key}) : super(key: key);
 
   @override
   Widget body(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
+
     return ListView(
       children: [
         const GreetingBanner(),
-        const Center(
+        Center(
           child: Padding(
-            padding: EdgeInsets.only(top: 100, bottom: 50),
+            padding:const  EdgeInsets.only(top: 100, bottom: 50),
             child: Text(
               "저는 이런 툴들을 사용해 봤습니다",
-              style: large,
+              style: textTheme.headlineLarge,
             ),
           ),
         ),
-        Wrap(
+        const Wrap(
           alignment: WrapAlignment.spaceEvenly,
           spacing: 20,
           runSpacing: 50,
-          children: const [
+          children:  [
             TechElement(height: 150, fileName: "Cpp_logo"),
             TechElement(height: 150, fileName: "CS_logo"),
             TechElement(height: 150, fileName: "Flutter_logo"),
@@ -38,20 +46,20 @@ class AboutPage extends DefaultTemplate {
             TechElement(height: 150, fileName: "Xamarin_logo")
           ],
         ),
-        const Center(
+        Center(
           child: Padding(
-            padding: EdgeInsets.only(top: 100, bottom: 50),
+            padding:const  EdgeInsets.only(top: 100, bottom: 50),
             child: Text(
               "그리고 이런 환경에서 작업하고 있습니다",
-              style: large,
+              style: textTheme.headlineLarge,
             ),
           ),
         ),
-        Wrap(
+        const Wrap(
           alignment: WrapAlignment.spaceEvenly,
           spacing: 20,
           runSpacing: 50,
-          children: const [
+          children:  [
             TechElement(height: 150, fileName: "Windows_logo"),
             TechElement(height: 150, fileName: "VisualStudio_logo"),
             TechElement(height: 150, fileName: "Vscode_logo"),
