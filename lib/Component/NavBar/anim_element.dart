@@ -22,7 +22,7 @@ class AnimatedElementState extends State<AnimatedElement>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _widthAnimation;
-  Color _widgetColor = const Color.fromARGB(0, 0, 0, 0);
+  Color _widgetColor = Colors.transparent;
 
   @override
   void initState() {
@@ -41,6 +41,8 @@ class AnimatedElementState extends State<AnimatedElement>
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+
     return DragTarget<int>(
       builder: (BuildContext context, List<dynamic> candidateData,
           List<dynamic> rejectedData) {
@@ -59,9 +61,9 @@ class AnimatedElementState extends State<AnimatedElement>
                     child: Center(child: widget.element),
                   ),
               Container(
-                decoration: const BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.all(Radius.elliptical(5, 5))),
+                decoration: BoxDecoration(
+                    color: colorScheme.secondary,
+                    borderRadius:const  BorderRadius.all(Radius.elliptical(5, 5))),
                 height: 5,
                 width: _widthAnimation.value,
               ),
@@ -70,16 +72,16 @@ class AnimatedElementState extends State<AnimatedElement>
         );
       },
       onWillAccept: (data) {
-        _widgetColor = Colors.white.withAlpha(50);
+        _widgetColor = colorScheme.onSecondary;
         _controller.forward();
         return true;
       },
       onAccept: (data) {
-        _widgetColor = const Color.fromARGB(0, 0, 0, 0);
+        _widgetColor = Colors.transparent;
         Application.router.navigateTo(context, widget.navigatePath);
       },
       onLeave: (data) {
-        _widgetColor = const Color.fromARGB(0, 0, 0, 0);
+        _widgetColor = Colors.transparent;
         _controller.reverse();
       },
     );
