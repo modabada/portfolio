@@ -11,53 +11,44 @@ class NavBar extends StatefulWidget {
 }
 
 class NavBarState extends State<NavBar> {
-  late final Map<String, Widget> images;
-
-  @override
-  void initState() {
-    super.initState();
-    images = {
-      "locator": Icon(
-        Icons.location_on,
-        size: widget.widgetHeight,
-        color: Colors.lightBlue,
-      ),
-      "locator_drag": Icon(
-        Icons.location_on_outlined,
-        size: widget.widgetHeight,
-        color: const Color.fromARGB(50, 255, 255, 255),
-      ),
-      "home": Icon(
-        Icons.home_rounded,
-        size: widget.widgetHeight,
-        color: const Color.fromARGB(255, 50, 50, 200),
-      )
-    };
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      color: const Color.fromARGB(100, 0, 0, 0),
-      textStyle: const TextStyle(fontSize: 24, color: Colors.white),
+    final colorScheme = Theme.of(context).colorScheme;
+    final locatorIcon = Icon(
+      Icons.location_on,
+      size: widget.widgetHeight,
+      color: colorScheme.primary,
+    );
+    final locatorDragIcon = Icon(
+      Icons.location_on_outlined,
+      size: widget.widgetHeight,
+      color: colorScheme.secondary,
+
+    );
+    final homeIcon = Icon(
+      Icons.home_rounded,
+      size: widget.widgetHeight,
+      color: colorScheme.primary,
+    );
+
+    return DefaultTextStyle(
+      style: Theme.of(context).textTheme.headlineSmall!,
       child: Wrap(
         children: [
-          SizedBox(
-            width: MediaQuery.of(context).size.width,
-          ),
           Draggable<int>(
             data: 0,
             childWhenDragging: SizedBox(
               width: widget.widgetHeight,
-              child: images["locator_drag"],
+              child: locatorDragIcon,
             ),
             feedback: SizedBox(
               width: widget.widgetHeight,
-              child: images["locator"],
+              child: locatorIcon,
             ),
             child: SizedBox(
               width: widget.widgetHeight,
-              child: images["locator"],
+              child: locatorIcon,
             ),
           ),
           Container(
@@ -72,7 +63,7 @@ class NavBarState extends State<NavBar> {
           ),
           AnimatedElement(
             width: widget.widgetHeight,
-            customElement: images["home"],
+            customElement: homeIcon,
             navigatePath: homePageRoute,
           ),
           AnimatedElement(
