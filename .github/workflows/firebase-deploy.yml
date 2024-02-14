@@ -1,6 +1,10 @@
 name: Deploy to firebase
 
 on:
+  push:
+    branches:
+      - master
+
   pull_request:
     types:
       - closed
@@ -15,7 +19,7 @@ jobs:
 
     steps:
       - name: Download build result
-        uses: actions/download-artifact@4
+        uses: actions/download-artifact@v4
         with:
           name: 'flutter web build'
           path: build/web
