@@ -18,9 +18,9 @@ class ErrorPage extends StatelessWidget {
           ListView(
             padding: EdgeInsets.symmetric(vertical: screenSize.height * 0.3),
             children: [
-              Column(
+              const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Text.rich(
                     TextSpan(
                       style: _largeText,
@@ -43,9 +43,9 @@ class ErrorPage extends StatelessWidget {
                 ],
               ),
               SizedBox(height: screenSize.height * 0.1),
-              Column(
+              const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Text.rich(
                     TextSpan(
                       style: _largeText,

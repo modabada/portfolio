@@ -1,3 +1,6 @@
+# firebase-deploy.yml deploy
+.firebase/
+
 # Miscellaneous
 *.class
 *.lock

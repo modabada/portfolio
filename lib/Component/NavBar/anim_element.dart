@@ -63,7 +63,8 @@ class AnimatedElementState extends State<AnimatedElement>
               Container(
                 decoration: BoxDecoration(
                     color: colorScheme.secondary,
-                    borderRadius:const  BorderRadius.all(Radius.elliptical(5, 5))),
+                    borderRadius:
+                        const BorderRadius.all(Radius.elliptical(5, 5))),
                 height: 5,
                 width: _widthAnimation.value,
               ),

@@ -1,0 +1,31 @@
+name: Dart
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test-dart:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup flutter for pub get
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.16.7"
+          channel: "stable"
+
+      - name: Testing dart
+        run: |
+          echo "Install flutter dependencies"
+          flutter pub get
+          
+          echo "Verify formatting"
+          dart format --output=none --set-exit-if-changed .
+          
+          echo "Analyze project source code"
+          dart analyze
