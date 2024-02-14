@@ -1,0 +1,33 @@
+name: Deploy to firebase
+
+on:
+  push:
+    branches:
+      - master
+
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    needs: build-flutter
+    # if build job has failed, do not try deploy
+    if: failure() == false
+
+    steps:
+      - name: Download build result
+        uses: actions/download-artifact@4
+        with:
+          name: 'flutter web build'
+          path: build/web
+
+      - name: Deploy to firebase
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_MODABADA }}'
+          channelId: live
+          projectId: modabada
