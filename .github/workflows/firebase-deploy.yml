@@ -1,21 +1,17 @@
 name: Deploy to firebase
 
 on:
-  push:
-    branches:
-      - master
-
   pull_request:
+    types:
+      - closed
     branches:
       - master
 
 jobs:
-  deploy:
+  deploy-firebase:
     runs-on: ubuntu-latest
 
-    needs: build-flutter
-    # if build job has failed, do not try deploy
-    if: failure() == false
+    if: github.event.pull_request.merged == true
 
     steps:
       - name: Download build result

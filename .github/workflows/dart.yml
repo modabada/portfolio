@@ -1,10 +1,6 @@
 name: Dart
 
 on:
-  push:
-    branches:
-      - master
-
   pull_request:
     branches:
       - master
@@ -17,15 +13,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup dart
-        uses: dart-lang/setup-dart@v1.6.2
+      - name: Setup flutter for pub get
+        uses: subosito/flutter-action@v2
         with:
-          sdk: "3.2.4"
+          flutter-version: "3.16.7"
+          channel: "stable"
 
       - name: Testing dart
         run: |
-          echo "Install dart dependencies"
-          dart pub get
+          echo "Install flutter dependencies"
+          flutter pub get
           
           echo "Verify formatting"
           dart format --output=none --set-exit-if-changed .
