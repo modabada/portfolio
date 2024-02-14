@@ -11,7 +11,6 @@ class NavBar extends StatefulWidget {
 }
 
 class NavBarState extends State<NavBar> {
-
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
@@ -24,7 +23,6 @@ class NavBarState extends State<NavBar> {
       Icons.location_on_outlined,
       size: widget.widgetHeight,
       color: colorScheme.secondary,
-
     );
     final homeIcon = Icon(
       Icons.home_rounded,

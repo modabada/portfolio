@@ -6,15 +6,15 @@ class LoadingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      textStyle: const TextStyle(fontSize: 72, color: Colors.white),
+    return const Material(
+      textStyle: TextStyle(fontSize: 72, color: Colors.white),
       child: Stack(
         alignment: Alignment.center,
         children: [
-          const Background(),
+          Background(),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
               Text("Loading..."),
               SizedBox(
                 width: 100,
