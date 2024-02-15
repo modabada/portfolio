@@ -23,34 +23,3 @@ jobs:
         run: |
           echo "Install flutter dependencies"
           flutter pub get
-
-  build-flutter:
-    runs-on: ubuntu-latest
-
-    needs: test-flutter
-    # if test job has failed, do not try build
-    if: failure() == false
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: "3.16.7"
-          channel: "stable"
-
-      - name: Install flutter dependencies
-        run: flutter pub get
-
-      - name: Flutter build for web
-        run: flutter build web
-
-      - name: Archive build result
-        uses: actions/upload-artifact@v4
-        with:
-          name: 'flutter web build'
-          path: build/web/
-          if-no-files-found: error
-          overwrite: true
