@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+@immutable
 abstract class AppTheme {
   const AppTheme({required this.theme});
 
@@ -14,12 +15,12 @@ class LightTheme extends AppTheme {
             useMaterial3: true,
             colorScheme: ColorScheme.fromSeed(
               seedColor: Colors.lightBlue,
-              brightness: Brightness.light,
             ),
           ),
         );
 }
 
+@immutable
 class DarkTheme extends AppTheme {
   @override
   DarkTheme()

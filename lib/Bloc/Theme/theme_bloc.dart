@@ -8,7 +8,7 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
     on<ThemeEvent>((ThemeEvent event, emit) {
       if (event is ToggleThemeBtnPressed) {
         emit(
-          state.update(
+          state.fromAppTheme(
             theme:
                 state.currentTheme is LightTheme ? DarkTheme() : LightTheme(),
           ),

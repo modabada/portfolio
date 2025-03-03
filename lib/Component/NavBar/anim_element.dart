@@ -1,24 +1,37 @@
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/router.dart';
 
+@immutable
 class AnimatedElement extends StatefulWidget {
-  const AnimatedElement(
-      {Key? key,
-      required this.width,
-      required this.navigatePath,
-      this.element,
-      this.customElement})
-      : super(key: key);
+  const AnimatedElement({
+    required this.width,
+    required this.navigatePath,
+    super.key,
+    this.element,
+    this.customElement,
+  });
+
   final double width;
   final String navigatePath;
   final Widget? element;
   final Widget? customElement;
 
   @override
-  State<AnimatedElement> createState() => AnimatedElementState();
+  State<AnimatedElement> createState() => _AnimatedElementState();
+
+  @override
+  void debugFillProperties(final DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DoubleProperty('width', width))
+      ..add(StringProperty('navigatePath', navigatePath));
+  }
 }
 
-class AnimatedElementState extends State<AnimatedElement>
+class _AnimatedElementState extends State<AnimatedElement>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _widthAnimation;
@@ -40,48 +53,50 @@ class AnimatedElementState extends State<AnimatedElement>
   }
 
   @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+  Widget build(final BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
     return DragTarget<int>(
-      builder: (BuildContext context, List<dynamic> candidateData,
-          List<dynamic> rejectedData) {
-        return Container(
-          decoration: BoxDecoration(
-            border: Border.all(width: 5, color: _widgetColor),
-            borderRadius: const BorderRadius.all(Radius.circular(15)),
-          ),
-          child: Stack(
-            alignment: Alignment.bottomLeft,
-            children: [
-              widget.customElement ??
-                  SizedBox(
-                    width: widget.width,
-                    height: widget.width / 2,
-                    child: Center(child: widget.element),
-                  ),
-              Container(
-                decoration: BoxDecoration(
-                    color: colorScheme.secondary,
-                    borderRadius:
-                        const BorderRadius.all(Radius.elliptical(5, 5))),
-                height: 5,
-                width: _widthAnimation.value,
+      builder: (
+        final BuildContext context,
+        final List<dynamic> candidateData,
+        final List<dynamic> rejectedData,
+      ) =>
+          DecoratedBox(
+        decoration: BoxDecoration(
+          border: Border.all(width: 5, color: _widgetColor),
+          borderRadius: const BorderRadius.all(Radius.circular(15)),
+        ),
+        child: Stack(
+          alignment: Alignment.bottomLeft,
+          children: <Widget>[
+            widget.customElement ??
+                SizedBox(
+                  width: widget.width,
+                  height: widget.width / 2,
+                  child: Center(child: widget.element),
+                ),
+            Container(
+              decoration: BoxDecoration(
+                color: colorScheme.secondary,
+                borderRadius: const BorderRadius.all(Radius.elliptical(5, 5)),
               ),
-            ],
-          ),
-        );
-      },
-      onWillAccept: (data) {
+              height: 5,
+              width: _widthAnimation.value,
+            ),
+          ],
+        ),
+      ),
+      onWillAccept: (final int? data) {
         _widgetColor = colorScheme.onSecondary;
         _controller.forward();
         return true;
       },
-      onAccept: (data) {
+      onAccept: (final int data) {
         _widgetColor = Colors.transparent;
-        Application.router.navigateTo(context, widget.navigatePath);
+        unawaited(Application.router.navigateTo(context, widget.navigatePath));
       },
-      onLeave: (data) {
+      onLeave: (final int? data) {
         _widgetColor = Colors.transparent;
         _controller.reverse();
       },

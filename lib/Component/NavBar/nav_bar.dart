@@ -1,30 +1,39 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:portfolio/router.dart';
 import 'package:portfolio/Component/NavBar/anim_element.dart';
+import 'package:portfolio/router.dart';
 
+@immutable
 class NavBar extends StatefulWidget {
-  const NavBar({Key? key}) : super(key: key);
-  final double widgetHeight = 90;
+  const NavBar({super.key});
+
+  double get widgetHeight => 90;
 
   @override
-  State<NavBar> createState() => NavBarState();
+  State<NavBar> createState() => _NavBarState();
+
+  @override
+  void debugFillProperties(final DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DoubleProperty('widgetHeight', widgetHeight));
+  }
 }
 
-class NavBarState extends State<NavBar> {
+class _NavBarState extends State<NavBar> {
   @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final locatorIcon = Icon(
+  Widget build(final BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final Icon locatorIcon = Icon(
       Icons.location_on,
       size: widget.widgetHeight,
       color: colorScheme.primary,
     );
-    final locatorDragIcon = Icon(
+    final Icon locatorDragIcon = Icon(
       Icons.location_on_outlined,
       size: widget.widgetHeight,
       color: colorScheme.secondary,
     );
-    final homeIcon = Icon(
+    final Icon homeIcon = Icon(
       Icons.home_rounded,
       size: widget.widgetHeight,
       color: colorScheme.primary,
@@ -33,7 +42,7 @@ class NavBarState extends State<NavBar> {
     return DefaultTextStyle(
       style: Theme.of(context).textTheme.headlineSmall!,
       child: Wrap(
-        children: [
+        children: <Widget>[
           Draggable<int>(
             data: 0,
             childWhenDragging: SizedBox(
@@ -54,7 +63,7 @@ class NavBarState extends State<NavBar> {
             height: widget.widgetHeight,
             alignment: Alignment.center,
             child: const Text(
-              "왼쪽 아이콘을 이동하고싶은\n아이콘으로 드래그하세요",
+              '왼쪽 아이콘을 이동하고싶은\n아이콘으로 드래그하세요',
               textAlign: TextAlign.center,
               softWrap: false,
             ),
@@ -66,27 +75,27 @@ class NavBarState extends State<NavBar> {
           ),
           AnimatedElement(
             width: widget.widgetHeight * 2,
-            element: const Text("About"),
+            element: const Text('About'),
             navigatePath: aboutPageRoute,
           ),
           AnimatedElement(
             width: widget.widgetHeight * 2,
-            element: const Text("School"),
+            element: const Text('School'),
             navigatePath: schoolPageRoute,
           ),
           AnimatedElement(
             width: widget.widgetHeight * 2,
-            element: const Text("Projects"),
+            element: const Text('Projects'),
             navigatePath: projectsPageRoute,
           ),
           AnimatedElement(
             width: widget.widgetHeight * 2,
-            element: const Text("Award"),
+            element: const Text('Award'),
             navigatePath: awardPageRoute,
           ),
           AnimatedElement(
             width: widget.widgetHeight * 2,
-            element: const Text("Resume"),
+            element: const Text('Resume'),
             navigatePath: resumePageRoute,
           ),
         ],

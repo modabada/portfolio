@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
+@immutable
 class TypingBar extends StatefulWidget {
-  const TypingBar({Key? key}) : super(key: key);
+  const TypingBar({super.key});
 
   @override
   State<TypingBar> createState() => _TypingBarState();
@@ -31,13 +32,11 @@ class _TypingBarState extends State<TypingBar>
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 4,
-      height: 90,
-      color: Colors.lightBlue.withAlpha(_colorAnimation.value.round()),
-    );
-  }
+  Widget build(final BuildContext context) => Container(
+        width: 4,
+        height: 90,
+        color: Colors.lightBlue.withAlpha(_colorAnimation.value.round()),
+      );
 
   @override
   void dispose() {
