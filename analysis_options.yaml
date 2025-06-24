@@ -1,10 +1,3 @@
-# This file configures the analyzer, which statically analyzes Dart code to
-# check for errors, warnings, and lints.
-#
-# The issues identified by the analyzer are surfaced in the UI of Dart-enabled
-# IDEs (https://dart.dev/tools#ides-and-editors). The analyzer can also be
-# invoked from the command line by running `flutter analyze`.
-
 # The following line activates a set of recommended lints for Flutter apps,
 # packages, and plugins designed to encourage good coding practices.
 include: package:flutter_lints/flutter.yaml
@@ -15,15 +8,693 @@ linter:
   # included above or to enable additional rules. A list of all available lints
   # and their documentation is published at
   # https://dart-lang.github.io/linter/lints/index.html.
-  #
-  # Instead of disabling a lint rule for the entire project in the
-  # section below, it can also be suppressed for a single line of code
-  # or a specific dart file by using the `// ignore: name_of_lint` and
-  # `// ignore_for_file: name_of_lint` syntax on the line or in the file
-  # producing the lint.
   rules:
-    # avoid_print: false  # Uncomment to disable the `avoid_print` rule
-    # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
+    # =====================================================
+    # =========       * 오류 및 실수 검사 *       =========
+    # =====================================================
+
+    # 항상 import 의 package 를 명시함 (자신 package 포함)
+    - always_use_package_imports
+
+    # dynamic 인수에 대한 호출 금지
+    - avoid_dynamic_calls
+
+    # body 없는 else 블록 금지
+    - avoid_empty_else
+
+    # print 문 금지 (debugPrint, log 등 이용)
+    - avoid_print
+
+    # lib/ 경로에 대한 상대 경로로 import 금지
+    - avoid_relative_lib_imports
+
+    # async 함수의 반환 형식을 null 로 지정 금지 (대신 Future<null> 장려)
+    # dart 3.3.0 에서 제거됨
+    - avoid_returning_null_for_future
+
+    # dart:io 에 대해 느린 I/O 금지 (await 을 통한 대기 보다, -Sync 함수 이용)
+    - avoid_slow_async_io
+
+    # object.toString 의 경우, release 시 compiler 에 의해 단축돼 오류 발생 가능
+    - avoid_type_to_string
+
+    # 타입의 이름과 동일한 이름의 인자 및 변수 이름을 금지함
+    - avoid_types_as_parameter_names
+
+    # web plugin 이 아닌 flutter package 에서, dart:html, dart:js 등을 import 금지
+    - avoid_web_libraries_in_flutter
+
+    # StreamSubscription 에서 listen 등을 하면 항상 streamSubscription.cancel 을 해야 함
+    - cancel_subscriptions
+
+    # IOSink 에서 open 등을 하면 항상 ioSink.close 를 해야 함
+    - close_sinks
+
+    # collection 의 타입과 관계 없는 data 를 인자로 넘기는 것을 금지 (<int>[].remove('1') 등)
+    - collection_methods_unrelated_type
+
+    # comment 에서, variable, method 를 가져와 서술할 때, scope 밖에 있는 것을 가져 오지 못하게 함
+    - comment_references
+
+    # finally 블록 에서, return, continue 등의 흐름 제어 금지
+    - control_flow_in_finally
+
+    # @Deprecated 된 멤버는 같은 package 에서 참조 금지
+    - deprecated_member_use_from_same_package
+
+    # 디버깅 용으로 모든 property 에 대해 설명 해야 함,
+    # StatefulWidget 의 debugFillProperties 를 override 하여 Flutter inspector 에서 위젯 트리를 표시할 때 속성에 대한 내용을 설명에 주로 쓰임
+    - diagnostic_describe_all_properties
+
+    # async 함수가 아닌 함수 에서 async 함수를 호출을 금지함
+    - discarded_futures
+
+    # if 나 for 문 등의 body 가 비어 있는 것을 금지함
+    - empty_statements
+
+    # == operator 를 override 하는 경우, hashCode 도 함께 override 하게 함
+    - hash_and_equals
+
+    # interface class 나 final class 등을 암시적 으로 reopen 하는 것을 방지함
+    - implicit_reopen
+
+    # dart 3.0 에서 지원 종료된 switch-case 문의 패턴을 금지함
+    # 3.0 으로 migration 을 쉽게 하기 위함
+    - invalid_case_patterns
+
+    # literal 로만 구성된 조건은 compile-time 에 결정이 되기 때문에 사용 금지함
+    - literal_only_boolean_expressions
+
+    # list 에서 string 들이 인접해 있는 것은 보통 , 를 잊은 경우가 많기 때문에 금지함
+    - no_adjacent_strings_in_list
+
+    # switch-case 에서 같은 값을 가진 case 문 생성 금지
+    - no_duplicate_case_values
+
+    # createState 에서는 instance 반환 외의 동작은 하면 안되고, constructor 에 인자를 전달 하지 않아야 한다.
+    - no_logic_in_create_state
+
+    # class 에서 스스로 값을 할당을 금지함 ( this.x = x; x = x 등)
+    - no_self_assignments
+
+    # wildcard 로 된 변수, 인자 이름을 금지함 (주로 underscore only names)
+    - no_wildcard_variable_uses
+
+    # 타입 지정 시 Null 대신 void 로 작성
+    - prefer_void_to_null
+
+    # == operator 에서 다른 object 의 타입을 test 해야 함
+    # 하지 않을 경우, 예상할 수 없는 null point exception 등이 발생 가능
+    # is operator 나 identical 함수 등으로 검사 가능
+    - test_types_in_equals
+
+    # try-catch-finally 에서 finally 에서 예외를 던질 경우, 추후에 debugging 이 힘듦
+    - throw_in_finally
+
+    # 할당 없는 계산 동작 등을 금지함 (1 + 2; foo ? bar : baz; 등)
+    - unnecessary_statements
+
+    # 다른 클래스 끼리 비교 연산 금지
+    - unrelated_type_equality_checks
+
+    # href 나 src, Element.html 등 html 의 요소에 직접 접근을 금지함
+    - unsafe_html
+
+    # async method 에서 buildContext 를 접근시, 쉽게 충돌이 발생할 수 있어 금지함
+    # 필요시 context.mounted 등으로 검사 후 사용
+    - use_build_context_synchronously
+
+    # 위젯의 constructor 에서 key 를 반드시 전달
+    - use_key_in_widget_constructors
+
+    # 문법이 잘못된 RegExp 사용을 금지함
+    - valid_regexps
+
+
+    # =====================================================
+    # ============       * 코드 스타일 *       ============
+    # =====================================================
+
+    # 항상 반환값 지정
+    - always_declare_return_types
+
+    # if 나 for 등에서 body 는 항상 새 줄에서 작성
+    - always_put_control_body_on_new_line
+
+    # named parameter 를 항상 처음 지정
+    - always_put_required_named_parameters_first
+
+    # default value 가 없는 named parameter 는 @required 를 통해 값을 반드시 지정
+    # dart 3.3.0 에서 제거됨
+    - always_require_non_null_named_parameters
+
+    # 모든 변수나 parameter 등에서 항상 type 을 지정
+    # avoid_types_on_closure_parameters 와 omit_local_variable_types 과 함께 사용 불가능
+    - always_specify_types
+
+    # 상위 class 의 method 나 field 를 재정의 하는 경우, 반드시 @override 로 annotation 을 사용
+    - annotate_overrides
+
+    # method 나 field 등을 다시 선언 하는 경우, 반드시 @redeclare 로 annotation 을 사용
+    - annotate_redeclares
+
+    # 타입 선언 시, 반드시 필요한 경우가 아니면 dynamic 으로 명시 금지
+    - avoid_annotating_with_dynamic
+
+    # 조건문 에서 boolean 상수 반환을 금지 ( condition ? true : boolExpression 등)
+    - avoid_bool_literals_in_conditional_expressions
+
+    # try-catch 에서 반드시 on 을 이용해 예외를 잡을 Exception 을 명시
+    - avoid_catches_without_on_clauses
+
+    # Error 는 runtime 이전에 방지할 수 있기 때문에 try-catch 에서는 Exception 만 처리
+    - avoid_catching_errors
+
+    # js 로 compile 될 때, 정수는 float 으로 표시돼, double 이나 int type 으로 is 연산을 수행시 예상할 수 없는 동작이 수행될 수 있음
+    - avoid_double_and_int_checks
+
+    # mutable class 에서 == operator 와 .hashcode 를 override 하는 것을 막음
+    # == operator 와 .hashCode 는 밀접한 관련이 있어야 하고, hashCode 는 많은 hash 기반 collection 에서
+    # hashCode 가 변할 수 있다는 가정을 하지 않아 예측할 수 없는 동작이 수행될 수 있음
+    - avoid_equals_and_hash_code_on_mutable_classes
+
+    # escape 문자를 사용해 quotes 를 표시 금지
+    - avoid_escaping_inner_quotes
+
+    # const 한 값들을 filed 로 할당을 금지, 대신 getter 를 이용
+    # 2018년 기준, VM 에서만 해당, JS 에서는 해당 되지 않음
+    - avoid_field_initializers_in_const_classes
+
+    # foreach 문에 arrow function 등의 익명 함수를 전달을 금지
+    # 대신 list.foreach(print) 등과 같이 사용
+    - avoid_function_literals_in_foreach_calls
+
+    # implement 에서는 == operator 와 hashCode 등의 method 가 override 된 경우 재정의 한 class 에서는 해당 method 가 초기화 됨
+    # 따라서 field 가 있는 class 들은 해당 내용에 연관이 있을 수 있어 implement 대신 extends 를 사용
+    - avoid_implementing_value_types
+
+    # dart 는 nullable 변수의 경우 값이 없으면 null 로 초기화 되기 때문에 변수의 초기값 을 null 로 초기화 금지
+    - avoid_init_to_null
+
+    # JS 로 compile 될 때, 정확히 표시할 수 없는 정수 리터럴 금지
+    # BigInt 등을 이용
+    - avoid_js_rounded_ints
+
+    # 한 줄에 여러 변수 선언 금지
+    - avoid_multiple_declarations_per_line
+
+    # == operator 에서 null check 는 불필요, 따라서 금지
+    - avoid_null_checks_in_equality_operators
+
+    # boolean parameter 가 positional 일 경우 이해가 힘들기 때문에 금지
+    - avoid_positional_boolean_parameters
+
+    # private typedef 는 보통 단일성 이기 때문에 금지
+    - avoid_private_typedef_functions
+
+    # 매개 변수의 기본값 과 일치한 값을 전달 금지
+    - avoid_redundant_argument_values
+
+    # parameter 의 이름은 해당 parameter 의 의도 및 기능을 포함함.
+    # 때문에 override 에서 parameter 의 이름을 변경 금지
+    - avoid_renaming_method_parameters
+
+    # setter 의 return type 을 명시 금지
+    - avoid_return_types_on_setters
+
+    # 혼돈을 유발할 수 있기 때문에 void method 에서 null 을 반환 금지
+    - avoid_returning_null_for_void
+
+    # method chaining 을 위해 this 를 반환 금지
+    # dart 에는 이미 cascade 연산자(..)가 있음
+    - avoid_returning_this
+
+    # getter 없이 setter 만 생성 금지
+    - avoid_setters_without_getters
+
+    # shadowing type parameter 금지
+    - avoid_shadowing_type_parameters
+
+    # 표현식 에서 cascade 연산자(..)를 단일로 사용 금지
+    - avoid_single_cascade_in_expression_statements
+
+    # 불필요 한 Container wrapping 금지
+    - avoid_unnecessary_containers
+
+    # 불필요 한 constructor 의 parameter 금지
+    - avoid_unused_constructor_parameters
+
+    # async 함수의 type 은 void 대신 Future<void> 로
+    - avoid_void_async
+
+    # Future 가 아닌 type 에 await 금지
+    # 특별히 microTask delay 를 위한 await null 은 가능
+    - await_only_futures
+
+    # extension 문법 에서는 UpperCamelCase 로 이름 작성
+    - camel_case_extensions
+
+    # class 나 typedef 에서는 UpperCamelCase 로 이름 작성
+    - camel_case_types
+
+    # cascade 연산자(..)를 사용할 수 있는 상황은 무조건 사용
+    - cascade_invocations
+
+    # nullable 한 값을 nullable 하지 않은 type 으로 casting 금지
+    - cast_nullable_to_non_nullable
+
+    # combinator 사용시 알파벳 순으로 정렬
+    - combinators_ordering
+
+    # conditional imports 에서 찾을 수 없는 파일을 import 금지
+    - conditional_uri_does_not_exist
+
+    # 상수의 이름 역시 lowerCamelCase 로 작성
+    - constant_identifier_names
+
+    # 생략 가능한 body 의 중괄호 생략 금지
+    - curly_braces_in_flow_control_structures
+
+    # 파일의 맨 위 등에 직접 library 에 대한 문서 주석 작성 금지
+    # 대신 library 예약어 이용, 그 위에 문서 주석 작성
+    - dangling_library_doc_comments
+
+    # deprecated annotation 을 관련 있는 곳에 모두 적용
+    # class 와 생성자, field 와 field 초기화 생성자, 부모 class 에서 deprecate 된 field 와 생성자 등
+    - deprecated_consistency
+
+    # dart package < package < 상대 경로 <  export 순으로 작성
+    # 각 섹션 마다 알파벳 순으로 정렬
+    - directives_ordering
+
+    # 구성 환경을 이용한 코드 금지
+    # bool.hasEnvironment, String.fromEnvironment 등
+    - do_not_use_environment
+
+    # 빈 catch body 금지
+    # 의도된 경우, 주석을 작성 혹은 예외를 _ 로 받아 무시의 의도 표현
+    - empty_catches
+
+    # 빈 constructor body 금지
+    # dart 에서는 ; 를 통해 body 없이 constructor 를 만들 수 있음
+    - empty_constructor_bodies
+
+    # 파일의 마지막 줄에 빈 줄 추가
+    - eol_at_end_of_file
+
+    # enum-like class 를 switch case 에서 이용할 때 모든 경우를 처리
+    - exhaustive_cases
+
+    # 파일 이름을 lowercase_with_underscores 로 작성
+    # .g.dart 등 명확 하지 않은 이름은 무시됨
+    - file_names
+
+    # flutter style 의 to do (// TODO(username): message)
+    # username 은 to do 를 만든 사람이 아닌, 해당 문제를 잘 알고 있는 사람
+    - flutter_style_todos
+
+    # 다른 package 의 파일을 직접 경로를 참조해 import 금지
+    - implementation_imports
+
+    # Function type 에 할당할 때, .call methods 를 tear-off 해 암시적 으로 호출 금지
+    - implicit_call_tearoffs
+
+    # 가능한 상황 에서는 return 문에서 할당도 같이 수행
+    - join_return_with_assignment
+
+    # 여러 줄 문자열 시작은 새 줄에서 시작
+    - leading_newlines_in_multiline_strings
+
+    # library 이름을 lowercase_with_underscores 로 작성
+    - library_names
+
+    # 가져온 library 의 이름을 as 로 명명할 경우 lowercase_with_underscores  로 작성
+    - library_prefixes
+
+    # public api 에서 private type 을 사용 금지
+    - library_private_types_in_public_api
+
+    # 한 줄이 80자 이상 금지
+    - lines_longer_than_80_chars
+
+    # 상위 class 의 parameter 이름과 동일한 super parameter 를 사용
+    - matching_super_parameters
+
+    # 인접한 문자열 사이에 공백 삽입
+    - missing_whitespace_between_adjacent_strings
+
+    # 가져온 library 의 이름을 as 로 명명할 경우 _ 가 선두로 오는 것을 금지
+    - no_leading_underscores_for_library_prefixes
+
+    # 로컬 변수나 parameter 에는 private 개념이 없기 때문에 _ 가 선두로 오는 것을 금지
+    - no_leading_underscores_for_local_identifiers
+
+    # bool 상수와 비교 금지
+    - no_literal_bool_comparisons
+
+    # toString 에서 runtimeType 을 호출시 성능 문제가 발생 가능, 금지
+    - no_runtimeType_toString
+
+    # 상수가 아닌 변수 이름 역시 lowerCamelCase 로 작성
+    - non_constant_identifier_names
+
+    # double.toDouble, string.toString 처럼 필요 없는 원시 타입에 method 호출 금지
+    - noop_primitive_operations
+
+    # nullable type parameter 에 null check 금지
+    - null_check_on_nullable_type_parameter
+
+    # closure 자리에 null literal 금지
+    - null_closures
+
+    # 멤버가 1개인 abstract class 금지
+    # 대신 typedef 등의 함수
+    - one_member_abstracts
+
+    # Exception 이나 Error 가 아닌 instance 를 throw 금지
+    - only_throw_errors
+
+    # field 를 override 금지
+    - overridden_fields
+
+    # public api 에서 항상 doc 작성
+    - package_api_docs
+
+    # 인자에 새 값 할당 금지
+    - parameter_assignments
+
+    # 긴 String literal 을 사용할 때, + 로 연결 대신 인접한 문자열 을 이용해 연결
+    - prefer_adjacent_string_concatenation
+
+    # assert 문은 constructor 의 body 에 작성 금지 (대신 initializer list 에 작성)
+    - prefer_asserts_in_initializer_lists
+
+    # assert 문에 반드시 메세지 작성
+    - prefer_asserts_with_message
+
+    # 가능한 상황은 collection literal 을 사용 (필수가 아닌 collection 타입 선언 금지)
+    - prefer_collection_literals
+
+    # 가능한 상황은 null check 이후 할당 대신, ??= 연산자 사용
+    - prefer_conditional_assignment
+
+    # constant constructor 를 사용 시, const 로 instance 생성
+    - prefer_const_constructors
+
+    # @immutable class 는 constant constructor 로 작성
+    - prefer_const_constructors_in_immutables
+
+    # 가능한 상황은 final 대신 const 키워드 사용
+    - prefer_const_declarations
+
+    # @immutable class 에서 list, map, set 등을 parameter 로 전달 시, 가능한 상황은 const 로 전달
+    - prefer_const_literals_to_create_immutables
+
+    # static method 로 객체 생성 대신, constructor 로 생성
+    - prefer_constructors_over_static_methods
+
+    # collection 에 element 가 존재 하는지 검사가 목적인 indexOf 금지
+    # 대신 contain method 사용
+    - prefer_contains
+
+    # return 문 만 있는 간단한 method 에 => 사용
+    - prefer_expression_function_bodies
+
+    # private field 는 가능한 상황은 final 로 선언
+    - prefer_final_fields
+
+    # foreach 문 에서 가능한 상황은 element 를 final 로 선언
+    - prefer_final_in_for_each
+
+    # local variable 은 가능한 상황은 final 로 선언
+    - prefer_final_locals
+
+    # parameter 를 가능한 상황은 final 로 선언
+    - prefer_final_parameters
+
+    # iterable 에서 map 을 만들 때, fromIterable 대신 for in 문으로 생성
+    - prefer_for_elements_to_map_fromIterable
+
+    # iterable 객체의 모든 요소에 함수나 method 를 적용 시 for 문 대신 foreach 사용
+    - prefer_foreach
+
+    # 함수를 변수로 할당 대신, 로컬 함수를 사용
+    - prefer_function_declarations_over_variables
+
+    # 함수를 typedef 시 Generic function type aliases 방식을 선호
+    - prefer_generic_function_type_aliases
+
+    # collection 을 생성 시 조건문 대신 if 를 선호
+    - prefer_if_elements_to_conditional_expressions
+
+    # 조건식 에서 null check 대신 ?? 등의 연산자 선호
+    - prefer_if_null_operators
+
+    # constructor 에서 가능한 상황은 initializing formal(Point(this.x, this.y) 를 사용
+    - prefer_initializing_formals
+
+    # list 를 초기화 시, ['a']..add('b')..add('c') 같은 사용 보다 요소를 inline 으로 초기화
+    - prefer_inlined_adds
+
+    # number literal 은 double 형 보다 int 형으로 작성 (변수의 type 으로 type 작성)
+    - prefer_int_literals
+
+    # 변수 등을 String 에 사용 시, String interpolation 을 사용
+    - prefer_interpolation_to_compose_strings
+
+    # collection 이 비어 있는지 검사가 목적인 length 금지
+    # 대신 isEmpty 사용
+    - prefer_is_empty
+
+    # collection 에 값이 있는지 검사가 목적인 length 나 isEmpty 금지
+    # 대신 isNotEmpty 사용
+    - prefer_is_not_empty
+
+    # 객체가 지정한 유형이 아닌지 확인시 is 연산자 보다 is! 연산자 사용
+    - prefer_is_not_operator
+
+    # collection 요소의 type 검사가 목적인 where 금지
+    # 대신 whereType 사용
+    - prefer_iterable_whereType
+
+    # 가능한 상황은 mixin 사용
+    - prefer_mixin
+
+    # nullable 한 function 이나 method 사용 시, 별도의 null check 대신 f?.call 사용
+    - prefer_null_aware_method_calls
+
+    # 조건식 에서 별도의 null check 대신 dart 의 null 연산자(?. 등) 을 사용
+    - prefer_null_aware_operators
+
+    # 작은 따옴표(') 선호
+    - prefer_single_quotes
+
+    # 이미 collection 에 저장된 값을 포함 시킬 때는, spread operator 를 선호
+    - prefer_spread_collections
+
+    # 초기화 하지 않은 변수에 대한 type 생략 금지
+    - prefer_typing_uninitialized_variables
+
+    # message 작성을 생략한 @deprecated annotation 금지
+    - provide_deprecation_message
+
+    # recursive 한 getter 생성 금지
+    - recursive_getters
+
+    # 함수 호출 또는 정의를 여러 줄에 작성할 경우 닫는 괄호를 제외한 모든 줄에 후행 쉼표 사용
+    - require_trailing_commas
+
+    # UI 에서 공백을 표시할 때, Container 대신 SizedBox 사용
+    - sized_box_for_whitespace
+
+    # 길이가 0 이나 double.infinity 인 SizedBox 대신 SizedBox.shrink, SizedBox.expand 사용
+    - sized_box_shrink_expand
+
+    # 문서 주석 작성 시 /// 사용 (/** 보다 /// 를 선호함)
+    - slash_for_doc_comments
+
+    # 위젯의 child 속성은 가장 아래에 작성
+    - sort_child_properties_last
+
+    # class 에서 constructor 를 가장 위에 작성
+    - sort_constructors_first
+
+    # unnamed constructor 를 다른 생성자 보다 위에 작성
+    - sort_unnamed_constructors_first
+
+    #  nullable 인 field 를 constructor 에서 non-nullable 로 초기화 할 때
+    # null check 하는 대신, 인자의 type 을 지정해 강제
+    # 예시:
+    # A.c1(this.p) : assert(p != null); // X
+    # A.c1(String this.p); // O
+    - tighten_type_of_initializing_formals
+
+    # public api 에서 method 의 반환 형식, 인자 형식 등을 모두 서술
+    - type_annotate_public_apis
+
+    # constructor 에서 field 를 초기화 할 때, 타입 서술
+    # 예시:
+    # Point(int this.x, int this.y); // O
+    - type_init_formals
+
+    # async 함수 호출 시, await 을 반드시 사용
+    # 의도된 생략일 경우, dart:async 의 unawaited 함수 혹은 무시 주석 사용
+    - unawaited_futures
+
+    # return 의 본문에 await 키워드 사용 금지
+    - unnecessary_await_in_return
+
+    # String interpolation 에서 가능 하다면 {} 생략
+    # 예: print('hello ${name}!'); // X
+    - unnecessary_brace_in_string_interps
+
+    # dart 는 break 문이 없는 switch-case 가 정상 동작 하기 때문에 반드시 필요한 break 만 작성 (empty state 등)
+    - unnecessary_breaks
+
+    # 불필요 한  const 키워드 반복 사용 금지
+    - unnecessary_const
+
+    # 기본 unnamed constructor 인 new 를 구현 및 사용 금지
+    - unnecessary_constructor_name
+
+    # 단순히 값을 조회/할당 만 하는 getter/setter 는 생성 금지
+    # 대신 public field 로 선언
+    - unnecessary_getters_setters
+
+    # 생략 가능한 람다 식은 생략
+    - unnecessary_lambdas
+
+    # 생략 가능한 late 키워드 생략
+    - unnecessary_late
+
+    # 문서 작성, 혹은 주석 작성이 없는 library 키워드 금지
+    - unnecessary_library_directive
+
+    # instance 생성 시 new 키워드 사용 금지
+    - unnecessary_new
+
+    # null-aware 할당자(??=) 를 이용해 null 할당 금지
+    - unnecessary_null_aware_assignments
+
+    # nullable 타입에 대해 확장된 method 사용 시 null-aware 연산자(.? 등) 사용 금지
+    - unnecessary_null_aware_operator_on_extension_on_nullable
+
+    # 인자가 nullable 일 경우, null check 금지
+    # 예시:
+    # (void (f(int j){}) (nullableValue!); // X
+    - unnecessary_null_checks
+
+    # if null 연산자(?? operator) 에 null literal 사용 금지
+    - unnecessary_null_in_if_null_operators
+
+    # nullable 타입의 final 변수 에서 non-nullable 한 값으로 초기화 금지
+    - unnecessary_nullable_for_final_variable_declarations
+
+    # 단순히 super method 를 호출 만 하는 override 금지
+    - unnecessary_overrides
+
+    # 불필요 한 괄호 사용 금지
+    - unnecessary_parenthesis
+
+    # 불필요 한 raw string 금지
+    # 예시:
+    # r"an sentence..."; // X
+    - unnecessary_raw_strings
+
+    # 불필요 한 escape 문자 사용 금지
+    - unnecessary_string_escapes
+
+    # 불필요 한 String interpolation 금지
+    - unnecessary_string_interpolations
+
+    # 불필요 한 this 키워드 금지
+    - unnecessary_this
+
+    # spreads 에서 불필요 한 toList 금지
+    - unnecessary_to_list_in_spreads
+
+    # 호출 하지 않은 main 외부 함수 금지
+    - unreachable_from_main
+
+    # color 속성만 제공 시, Container 대신 ColoredBox 사용
+    - use_colored_box
+
+    # decoration 속성만 제공 시, Container 대신 DecoratedBox 사용
+    - use_decorated_box
+
+    # enum 으로 전환 가능한 class 는 전환
+    - use_enums
+
+    # 색상 코드 지정 시, ARGB 형식의 16진수를 0을 포함해 8자리로 작성
+    - use_full_hex_values_for_flutter_colors
+
+    # 함수를 매개 변수로 사용 시, 함수를 generic function 으로 선언
+    # 예시:
+    # bool isEquals(Object getOtherObject(int parameter)); // X
+    # bool isEquals(Object Function(int parameter) getOtherObject); // O
+    - use_function_type_syntax_for_parameters
+
+    # nullable bool 변수를 bool 로 변환 시, if null(?? operator) 사용
+    - use_if_null_to_convert_nulls_to_bools
+
+    # 홀/짝 확인 시 int.isEven/isOdd 사용
+    - use_is_even_rather_than_modulo
+
+    # non-nullable 한 private member 는 late 로 선언
+    - use_late_for_private_fields_and_variables
+
+    # 이미 정의된 const 값이 있다면 사용
+    # 예시:
+    # Duration.zero
+    - use_named_constants
+
+    # escape 문자 사용을 피하기 위해 raw string 사용
+    - use_raw_strings
+
+    # 가능한 상황은 throw 문 대신 rethrow 사용
+    # 예시:
+    # catch(e) {if(!canHandle(e)) throw e;} // X
+    # catch(e) {if(!canHandle(e)) rethrow;} // O
+    - use_rethrow_when_possible
+
+    # field 의 값 변경 시, method 가 아닌 setter 사용
+    - use_setters_to_change_properties
+
+    # 문자열 조작 시 StringBuffer 사용
+    - use_string_buffers
+
+    # part of 키워드 사용 시, 객체나 타입을 직접 사용 대신 파일의 경로를 사용
+    - use_string_in_part_of_directives
+
+    # 가능한 상황은 super initializer 로 constructor 작성
+    - use_super_parameters
+
+    # test 작성 시 try-catch 와 함께 쓰는 fail() 대신 throwA 와 (async 의 경우) exceptLater 를 통해 처리
+    - use_test_throws_matchers
+
+    # object 를 다른 object 로 변환 하는 method 는, to/as 접두사 사용
+    - use_to_and_as_if_applicable
+
+    # void 에 값 할당 금지
+    - void_checks
+
+
+    # =====================================================
+    # ==============       * PUB 규칙 *       =============
+    # =====================================================
+
+    # 필요한 package 를 모두 pubspec.yaml 파일에 dependencies 로 작성
+    - depend_on_referenced_packages
+
+    # package 이름을 lowercase_with_underscores 로 작성
+    - package_names
+
+    # url 작성 시, git: 이나 http: 대신 https: 사용
+    - secure_pubspec_urls
+
+    # dependencies 를 알파벳 순으로 정렬
+    - sort_pub_dependencies
+
 
 # Additional information about this file can be found at
 # https://dart.dev/guides/language/analysis-options

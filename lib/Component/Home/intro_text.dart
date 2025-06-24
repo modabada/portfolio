@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:korea_regexp/korea_regexp.dart';
 import 'package:portfolio/Component/Home/typing_bar.dart';
 
+@immutable
 class IntroText extends StatefulWidget {
-  const IntroText({Key? key}) : super(key: key);
+  const IntroText({super.key});
 
   @override
   State<IntroText> createState() => _IntroTextState();
@@ -23,34 +24,31 @@ class _IntroTextState extends State<IntroText> {
   void initState() {
     super.initState();
     _textStyle = const TextStyle(fontSize: 64, color: Colors.lightBlue);
-    _textList = [
-      explode("포기하지 않는").join(),
-      explode("다양한 경험을 쌓고싶은").join(),
-      explode("미래의 소프트웨어 개발자").join(),
-      explode("하루하루 발전하는").join()
+    _textList = <String>[
+      List<String>.unmodifiable(explode('포기하지 않는')).join(),
+      List<String>.unmodifiable(explode('다양한 경험을 쌓고싶은')).join(),
+      List<String>.unmodifiable(explode('미래의 소프트웨어 개발자')).join(),
+      List<String>.unmodifiable(explode('하루하루 발전하는')).join(),
     ];
     setListener(3000, isPaused: true);
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-      constraints: const BoxConstraints(minHeight: 93),
-      child: RichText(
-        overflow: TextOverflow.clip,
-        maxLines: 2,
-        text: TextSpan(
-          text: _nowText,
-          style: _textStyle,
-          children: const [
-            WidgetSpan(
-              child: TypingBar(),
-            ),
-          ],
+  Widget build(final BuildContext context) => Container(
+        constraints: const BoxConstraints(minHeight: 93),
+        child: RichText(
+          maxLines: 2,
+          text: TextSpan(
+            text: _nowText,
+            style: _textStyle,
+            children: const <InlineSpan>[
+              WidgetSpan(
+                child: TypingBar(),
+              ),
+            ],
+          ),
         ),
-      ),
-    );
-  }
+      );
 
   @override
   void dispose() {
@@ -58,7 +56,7 @@ class _IntroTextState extends State<IntroText> {
     super.dispose();
   }
 
-  void setListener(int delayTime, {bool isPaused = false}) {
+  void setListener(final int delayTime, {final bool isPaused = false}) {
     if (_textListener != null) {
       _textListener?.cancel();
     }
@@ -70,7 +68,7 @@ class _IntroTextState extends State<IntroText> {
     } else {
       _textListener = Timer.periodic(
         Duration(milliseconds: delayTime),
-        (timer) => updateText(),
+        (final Timer timer) => updateText(),
       );
     }
   }

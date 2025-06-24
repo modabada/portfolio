@@ -1,44 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:portfolio/Component/Home/intro_text.dart';
 
+@immutable
 class IntroBanner extends StatelessWidget {
-  const IntroBanner({Key? key}) : super(key: key);
+  const IntroBanner({super.key});
 
-  final TextStyle _textStyle = const TextStyle(
-    fontSize: 48,
-    color: Colors.white,
-  );
+  TextStyle get _textStyle => const TextStyle(
+        fontSize: 48,
+        color: Colors.white,
+      );
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(final BuildContext context) {
     final Size screenSize = MediaQuery.of(context).size;
     return Container(
       height: 896,
       color: Colors.black.withAlpha(50),
       child: Stack(
-        children: [
+        children: <Widget>[
           Image.asset(
-            "lib/Assets/Image/banner_back.png",
+            'lib/Assets/Image/banner_back.png',
             height: 896,
             width: screenSize.width,
             fit: BoxFit.cover,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
+            children: <Widget>[
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                  children: <Widget>[
                     Text(
-                      "안녕하세요, 저는",
+                      '안녕하세요, 저는',
                       style: _textStyle,
                       overflow: TextOverflow.clip,
                       softWrap: false,
                     ),
                     const IntroText(),
                     Text(
-                      "문인우 입니다",
+                      '문인우 입니다',
                       style: _textStyle,
                       overflow: TextOverflow.clip,
                       softWrap: false,
@@ -58,11 +59,11 @@ class IntroBanner extends StatelessWidget {
                     height: screenSize.width * 0.19375 * 1.34408,
                     decoration: const BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage("lib/Assets/Image/IDPhoto.png"),
+                        image: AssetImage('lib/Assets/Image/IDPhoto.png'),
                         fit: BoxFit.cover,
                       ),
                       borderRadius: BorderRadius.all(
-                        Radius.elliptical(1000.00, 1344.08),
+                        Radius.elliptical(1000, 1344.08),
                       ),
                     ),
                   ),
