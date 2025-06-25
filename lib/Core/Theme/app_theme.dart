@@ -12,6 +12,7 @@ class LightTheme extends AppTheme {
   LightTheme()
       : super(
           theme: ThemeData(
+            fontFamily: 'NotoSansKr',
             useMaterial3: true,
             colorScheme: ColorScheme.fromSeed(
               seedColor: Colors.lightBlue,
@@ -26,6 +27,7 @@ class DarkTheme extends AppTheme {
   DarkTheme()
       : super(
           theme: ThemeData(
+            fontFamily: 'NotoSansKr',
             useMaterial3: true,
             colorScheme: ColorScheme.fromSeed(
               seedColor: Colors.deepPurple,

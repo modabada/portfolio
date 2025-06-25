@@ -30,3 +30,19 @@ flutter:
   assets:
     - lib/Assets/Image/
     - lib/Assets/Tech_logo/
+
+  fonts:
+    - family: NotoSansKr
+      fonts:
+        - asset: lib/Assets/Fonts/NotoSansKR-Black.ttf
+          weight: 900
+        - asset: lib/Assets/Fonts/NotoSansKR-Bold.ttf
+          weight: 700
+        - asset: lib/Assets/Fonts/NotoSansKR-Light.ttf
+          weight: 300
+        - asset: lib/Assets/Fonts/NotoSansKR-Medium.ttf
+          weight: 500
+        - asset: lib/Assets/Fonts/NotoSansKR-Regular.ttf
+          weight: 400
+        - asset: lib/Assets/Fonts/NotoSansKR-Thin.ttf
+          weight: 100
