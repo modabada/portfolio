@@ -31,7 +31,8 @@ class _NavBarState extends State<NavBar> {
 
     return DefaultTextStyle(
       style: Theme.of(context).textTheme.headlineSmall!,
-      child: SizedBox(
+      child: Container(
+        color: colorScheme.inversePrimary.withOpacity(0.8),
         height: widget.widgetHeight,
         width: double.infinity,
         child: Row(
