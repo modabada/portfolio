@@ -7,7 +7,7 @@ import 'package:portfolio/router.dart';
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
 
-  double get widgetHeight => 90;
+  double get widgetHeight => 80;
 
   @override
   State<NavBar> createState() => _NavBarState();
@@ -23,16 +23,6 @@ class _NavBarState extends State<NavBar> {
   @override
   Widget build(final BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final Icon locatorIcon = Icon(
-      Icons.location_on,
-      size: widget.widgetHeight,
-      color: colorScheme.primary,
-    );
-    final Icon locatorDragIcon = Icon(
-      Icons.location_on_outlined,
-      size: widget.widgetHeight,
-      color: colorScheme.secondary,
-    );
     final Icon homeIcon = Icon(
       Icons.home_rounded,
       size: widget.widgetHeight,
@@ -41,64 +31,47 @@ class _NavBarState extends State<NavBar> {
 
     return DefaultTextStyle(
       style: Theme.of(context).textTheme.headlineSmall!,
-      child: Wrap(
-        children: <Widget>[
-          Draggable<int>(
-            data: 0,
-            childWhenDragging: SizedBox(
-              width: widget.widgetHeight,
-              child: locatorDragIcon,
+      child: SizedBox(
+        height: widget.widgetHeight,
+        width: double.infinity,
+        child: Row(
+          children: <Widget>[
+            AnimatedElement(
+              element: homeIcon,
+              navigatePath: homePageRoute,
             ),
-            feedback: SizedBox(
-              width: widget.widgetHeight,
-              child: locatorIcon,
+            const Expanded(
+              child: AnimatedElement(
+                element: Text('About'),
+                navigatePath: aboutPageRoute,
+              ),
             ),
-            child: SizedBox(
-              width: widget.widgetHeight,
-              child: locatorIcon,
+            const Expanded(
+              child: AnimatedElement(
+                element: Text('School'),
+                navigatePath: schoolPageRoute,
+              ),
             ),
-          ),
-          Container(
-            width: widget.widgetHeight * 4,
-            height: widget.widgetHeight,
-            alignment: Alignment.center,
-            child: const Text(
-              '왼쪽 아이콘을 이동하고싶은\n아이콘으로 드래그하세요',
-              textAlign: TextAlign.center,
-              softWrap: false,
+            const Expanded(
+              child: AnimatedElement(
+                element: Text('Projects'),
+                navigatePath: projectsPageRoute,
+              ),
             ),
-          ),
-          AnimatedElement(
-            width: widget.widgetHeight,
-            customElement: homeIcon,
-            navigatePath: homePageRoute,
-          ),
-          AnimatedElement(
-            width: widget.widgetHeight * 2,
-            element: const Text('About'),
-            navigatePath: aboutPageRoute,
-          ),
-          AnimatedElement(
-            width: widget.widgetHeight * 2,
-            element: const Text('School'),
-            navigatePath: schoolPageRoute,
-          ),
-          AnimatedElement(
-            width: widget.widgetHeight * 2,
-            element: const Text('Projects'),
-            navigatePath: projectsPageRoute,
-          ),
-          AnimatedElement(
-            width: widget.widgetHeight * 2,
-            element: const Text('Award'),
-            navigatePath: awardPageRoute,
-          ),
-          AnimatedElement(
-            width: widget.widgetHeight * 2,
-            element: const Text('Resume'),
-            navigatePath: resumePageRoute,
-          ),
-        ],
+            const Expanded(
+              child: AnimatedElement(
+                element: Text('Award'),
+                navigatePath: awardPageRoute,
+              ),
+            ),
+            const Expanded(
+              child: AnimatedElement(
+                element: Text('Resume'),
+                navigatePath: resumePageRoute,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

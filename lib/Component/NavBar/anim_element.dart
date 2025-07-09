@@ -1,23 +1,20 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/router.dart';
 
 @immutable
 class AnimatedElement extends StatefulWidget {
   const AnimatedElement({
-    required this.width,
     required this.navigatePath,
+    required this.element,
     super.key,
-    this.element,
-    this.customElement,
   });
 
-  final double width;
   final String navigatePath;
-  final Widget? element;
-  final Widget? customElement;
+  final Widget element;
 
   @override
   State<AnimatedElement> createState() => _AnimatedElementState();
@@ -25,9 +22,7 @@ class AnimatedElement extends StatefulWidget {
   @override
   void debugFillProperties(final DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DoubleProperty('width', width))
-      ..add(StringProperty('navigatePath', navigatePath));
+    properties.add(StringProperty('navigatePath', navigatePath));
   }
 }
 
@@ -36,6 +31,7 @@ class _AnimatedElementState extends State<AnimatedElement>
   late final AnimationController _controller;
   late final Animation<double> _widthAnimation;
   Color _widgetColor = Colors.transparent;
+  double? _widgetWidth;
 
   @override
   void initState() {
@@ -45,61 +41,57 @@ class _AnimatedElementState extends State<AnimatedElement>
       duration: const Duration(milliseconds: 200),
     );
 
-    _widthAnimation = Tween<double>(begin: 0, end: widget.width).animate(
+    _widthAnimation = Tween<double>(begin: 0, end: 1).animate(
       CurvedAnimation(parent: _controller, curve: Curves.easeIn),
     );
 
     _widthAnimation.addListener(() => setState(() {}));
+
+    WidgetsBinding.instance.addPostFrameCallback((final Duration duration) {
+      // double.infinity 는 오류가 발생, 그냥 최대 크기로 설정
+      _widgetWidth = MediaQuery.of(context).size.width;
+    });
   }
 
   @override
   Widget build(final BuildContext context) {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
 
-    return DragTarget<int>(
-      builder: (
-        final BuildContext context,
-        final List<dynamic> candidateData,
-        final List<dynamic> rejectedData,
-      ) =>
-          DecoratedBox(
-        decoration: BoxDecoration(
-          border: Border.all(width: 5, color: _widgetColor),
-          borderRadius: const BorderRadius.all(Radius.circular(15)),
-        ),
-        child: Stack(
-          alignment: Alignment.bottomLeft,
-          children: <Widget>[
-            widget.customElement ??
-                SizedBox(
-                  width: widget.width,
-                  height: widget.width / 2,
-                  child: Center(child: widget.element),
-                ),
-            Container(
-              decoration: BoxDecoration(
-                color: colorScheme.secondary,
-                borderRadius: const BorderRadius.all(Radius.elliptical(5, 5)),
-              ),
-              height: 5,
-              width: _widthAnimation.value,
-            ),
-          ],
-        ),
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        border: Border.all(width: 4, color: _widgetColor),
+        borderRadius: const BorderRadius.all(Radius.circular(16)),
       ),
-      onWillAccept: (final int? data) {
-        _widgetColor = colorScheme.onSecondary;
-        _controller.forward();
-        return true;
-      },
-      onAccept: (final int data) {
-        _widgetColor = Colors.transparent;
-        unawaited(Application.router.navigateTo(context, widget.navigatePath));
-      },
-      onLeave: (final int? data) {
-        _widgetColor = Colors.transparent;
-        _controller.reverse();
-      },
+      child: Stack(
+        alignment: Alignment.bottomLeft,
+        children: <Widget>[
+          MouseRegion(
+            onEnter: (final PointerEnterEvent event) {
+              _widgetColor = colorScheme.onSecondary;
+              _controller.forward();
+            },
+            onExit: (final PointerExitEvent event) {
+              _widgetColor = Colors.transparent;
+              _controller.reverse();
+            },
+            cursor: SystemMouseCursors.click,
+            child: GestureDetector(
+              onTap: () => unawaited(
+                Application.router.navigateTo(context, widget.navigatePath),
+              ),
+              child: Center(child: widget.element),
+            ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: colorScheme.secondary,
+              borderRadius: const BorderRadius.all(Radius.elliptical(5, 5)),
+            ),
+            height: 5,
+            width: _widthAnimation.value * (_widgetWidth ?? 0),
+          ),
+        ],
+      ),
     );
   }
 
