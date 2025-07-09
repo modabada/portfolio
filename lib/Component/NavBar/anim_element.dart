@@ -47,9 +47,8 @@ class _AnimatedElementState extends State<AnimatedElement>
 
     _widthAnimation.addListener(() => setState(() {}));
 
-    WidgetsBinding.instance.addPostFrameCallback((final Duration duration) {
-      // double.infinity 는 오류가 발생, 그냥 최대 크기로 설정
-      _widgetWidth = MediaQuery.of(context).size.width;
+    WidgetsBinding.instance.addPersistentFrameCallback((final Duration duration) {
+      _widgetWidth = context.size!.width;
     });
   }
 
