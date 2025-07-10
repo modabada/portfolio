@@ -47,9 +47,11 @@ class _AnimatedElementState extends State<AnimatedElement>
 
     _widthAnimation.addListener(() => setState(() {}));
 
-    WidgetsBinding.instance.addPersistentFrameCallback((final Duration duration) {
-      _widgetWidth = context.size!.width;
-    });
+    WidgetsBinding.instance.addPersistentFrameCallback(
+      (final Duration duration) {
+        _widgetWidth = context.size!.width;
+      },
+    );
   }
 
   @override
