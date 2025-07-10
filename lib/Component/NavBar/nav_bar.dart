@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:portfolio/Component/NavBar/anim_element.dart';
+import 'package:portfolio/Component/NavBar/dark_mode_button.dart';
 import 'package:portfolio/router.dart';
 
 @immutable
@@ -71,6 +72,7 @@ class _NavBarState extends State<NavBar> {
                 navigatePath: resumePageRoute,
               ),
             ),
+            const DarkModeButton(),
           ],
         ),
       ),
