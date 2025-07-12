@@ -66,20 +66,20 @@ class _AnimatedElementState extends State<AnimatedElement>
       child: Stack(
         alignment: Alignment.bottomLeft,
         children: <Widget>[
-          MouseRegion(
-            onEnter: (final PointerEnterEvent event) {
-              _widgetColor = colorScheme.onSecondary;
-              _controller.forward();
-            },
-            onExit: (final PointerExitEvent event) {
-              _widgetColor = Colors.transparent;
-              _controller.reverse();
-            },
-            cursor: SystemMouseCursors.click,
-            child: GestureDetector(
-              onTap: () => unawaited(
-                Application.router.navigateTo(context, widget.navigatePath),
-              ),
+          GestureDetector(
+            onTap: () => unawaited(
+              Application.router.navigateTo(context, widget.navigatePath),
+            ),
+            child: MouseRegion(
+              onEnter: (final PointerEnterEvent event) {
+                _widgetColor = colorScheme.onSecondary;
+                _controller.forward();
+              },
+              onExit: (final PointerExitEvent event) {
+                _widgetColor = Colors.transparent;
+                _controller.reverse();
+              },
+              cursor: SystemMouseCursors.click,
               child: Center(child: widget.element),
             ),
           ),
