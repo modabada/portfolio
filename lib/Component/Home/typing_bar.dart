@@ -32,11 +32,14 @@ class _TypingBarState extends State<TypingBar>
   }
 
   @override
-  Widget build(final BuildContext context) => Container(
-        width: 4,
-        height: 90,
-        color: Colors.lightBlue.withAlpha(_colorAnimation.value.round()),
-      );
+  Widget build(final BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    return Container(
+      width: 4,
+      height: 90,
+      color: colorScheme.primary.withAlpha(_colorAnimation.value.round()),
+    );
+  }
 
   @override
   void dispose() {

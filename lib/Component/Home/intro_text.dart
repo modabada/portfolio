@@ -12,7 +12,6 @@ class IntroText extends StatefulWidget {
 }
 
 class _IntroTextState extends State<IntroText> {
-  late final TextStyle _textStyle;
   late final List<String> _textList;
   String _nowText = '';
   int _target = 0;
@@ -23,7 +22,6 @@ class _IntroTextState extends State<IntroText> {
   @override
   void initState() {
     super.initState();
-    _textStyle = const TextStyle(fontSize: 64, color: Colors.lightBlue);
     _textList = <String>[
       List<String>.unmodifiable(explode('포기하지 않는')).join(),
       List<String>.unmodifiable(explode('다양한 경험을 쌓고싶은')).join(),
@@ -34,13 +32,20 @@ class _IntroTextState extends State<IntroText> {
   }
 
   @override
-  Widget build(final BuildContext context) => Container(
+  Widget build(final BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    final TextStyle textStyle = textTheme.displayLarge!.copyWith(
+      color: colorScheme.primary,
+    );
+
+    return Container(
         constraints: const BoxConstraints(minHeight: 93),
         child: RichText(
           maxLines: 2,
           text: TextSpan(
             text: _nowText,
-            style: _textStyle,
+            style: textStyle,
             children: const <InlineSpan>[
               WidgetSpan(
                 child: TypingBar(),
@@ -49,6 +54,7 @@ class _IntroTextState extends State<IntroText> {
           ),
         ),
       );
+  }
 
   @override
   void dispose() {
