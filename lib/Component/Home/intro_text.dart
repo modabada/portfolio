@@ -25,7 +25,9 @@ class _IntroTextState extends State<IntroText> {
     _textList = <String>[
       List<String>.unmodifiable(explode('포기하지 않는')).join(),
       List<String>.unmodifiable(explode('다양한 경험을 쌓고싶은')).join(),
+      List<String>.unmodifiable(explode('문제를 보면 해결하고 싶은')).join(),
       List<String>.unmodifiable(explode('미래의 소프트웨어 개발자')).join(),
+      List<String>.unmodifiable(explode('버그와 함께 사는')).join(),
       List<String>.unmodifiable(explode('하루하루 발전하는')).join(),
     ];
     setListener(3000, isPaused: true);
@@ -40,20 +42,21 @@ class _IntroTextState extends State<IntroText> {
     );
 
     return Container(
-        constraints: const BoxConstraints(minHeight: 93),
-        child: RichText(
-          maxLines: 2,
-          text: TextSpan(
-            text: _nowText,
-            style: textStyle,
-            children: const <InlineSpan>[
-              WidgetSpan(
-                child: TypingBar(),
-              ),
-            ],
-          ),
+      constraints: const BoxConstraints(minHeight: 93),
+      child: RichText(
+        maxLines: 2,
+        textAlign: TextAlign.center,
+        text: TextSpan(
+          text: _nowText,
+          style: textStyle,
+          children: const <InlineSpan>[
+            WidgetSpan(
+              child: TypingBar(),
+            ),
+          ],
         ),
-      );
+      ),
+    );
   }
 
   @override
