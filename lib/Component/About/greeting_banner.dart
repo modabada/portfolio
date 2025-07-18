@@ -18,7 +18,7 @@ class GreetingBanner extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           SizedBox(
-            width: screenSize.width * 0.52,
+            width: screenSize.width * 0.5,
             child: Text.rich(
               TextSpan(
                 style: textTheme.titleLarge,
@@ -33,7 +33,7 @@ class GreetingBanner extends StatelessWidget {
                     text: '안녕하세요, 저는 서울로봇고등학교에서 첨단로봇 제어과를 전공한 ',
                   ),
                   TextSpan(
-                    text: '문인우 ',
+                    text: '문인우',
                     style: TextStyle(color: colorScheme.primary),
                   ),
                   const TextSpan(text: '입니다\n\n'),
@@ -44,10 +44,10 @@ class GreetingBanner extends StatelessWidget {
                   const TextSpan(text: '농구\n'),
                   arrow(colorScheme.onSurface),
                   TextSpan(
-                    text: '(코딩이나 센서 원리 등의)',
+                    text: '(코딩 외의 잡다한)',
                     style: textTheme.titleSmall,
                   ),
-                  const TextSpan(text: '기타 정보 검색\n'),
+                  const TextSpan(text: '정보 검색\n'),
                   const TextSpan(text: '등이 있습니다'),
                 ],
               ),
@@ -55,7 +55,7 @@ class GreetingBanner extends StatelessWidget {
           ),
           WavingHand(
             color: colorScheme.onSurface,
-            size: screenSize.width * 0.234375,
+            size: screenSize.width * 0.24,
           ),
         ],
       ),
