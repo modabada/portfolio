@@ -16,7 +16,7 @@ class AboutPage extends DefaultTemplate {
         const GreetingBanner(),
         Center(
           child: Padding(
-            padding: const EdgeInsets.only(top: 100, bottom: 50),
+            padding: const EdgeInsets.only(top: 96, bottom: 48),
             child: Text(
               '저는 이런 툴들을 사용해 봤습니다',
               style: textTheme.headlineLarge,
@@ -25,25 +25,23 @@ class AboutPage extends DefaultTemplate {
         ),
         const Wrap(
           alignment: WrapAlignment.spaceEvenly,
-          spacing: 20,
-          runSpacing: 50,
+          spacing: 24,
+          runSpacing: 48,
           children: <Widget>[
-            TechElement(height: 150, fileName: 'Cpp_logo'),
-            TechElement(height: 150, fileName: 'CS_logo'),
-            TechElement(height: 150, fileName: 'Flutter_logo'),
-            TechElement(height: 150, fileName: 'Java_logo'),
-            TechElement(height: 150, fileName: 'Javascript_logo'),
-            TechElement(height: 150, fileName: 'Jupyter_logo'),
-            TechElement(height: 150, fileName: 'Python_logo'),
-            TechElement(height: 150, fileName: 'React_logo'),
-            TechElement(height: 150, fileName: 'Tensorflow_logo'),
-            TechElement(height: 150, fileName: 'Unity_logo'),
-            TechElement(height: 150, fileName: 'Xamarin_logo'),
+            TechElement(height: 144, fileName: 'Cpp_logo'),
+            TechElement(height: 144, fileName: 'CS_logo'),
+            TechElement(height: 144, fileName: 'Flutter_logo'),
+            TechElement(height: 144, fileName: 'Python_logo'),
+            TechElement(height: 144, fileName: 'Jupyter_logo'),
+            TechElement(height: 144, fileName: 'Javascript_logo'),
+            TechElement(height: 144, fileName: 'React_logo'),
+            TechElement(height: 144, fileName: 'Tensorflow_logo'),
+            TechElement(height: 144, fileName: 'Unreal_logo'),
           ],
         ),
         Center(
           child: Padding(
-            padding: const EdgeInsets.only(top: 100, bottom: 50),
+            padding: const EdgeInsets.only(top: 96, bottom: 48),
             child: Text(
               '그리고 이런 환경에서 작업하고 있습니다',
               style: textTheme.headlineLarge,
@@ -52,16 +50,17 @@ class AboutPage extends DefaultTemplate {
         ),
         const Wrap(
           alignment: WrapAlignment.spaceEvenly,
-          spacing: 20,
-          runSpacing: 50,
+          spacing: 24,
+          runSpacing: 48,
           children: <Widget>[
-            TechElement(height: 150, fileName: 'Windows_logo'),
-            TechElement(height: 150, fileName: 'VisualStudio_logo'),
-            TechElement(height: 150, fileName: 'Vscode_logo'),
-            TechElement(height: 150, fileName: 'AndroidStudio_logo'),
+            TechElement(height: 144, fileName: 'Windows_logo'),
+            TechElement(height: 144, fileName: 'Ubuntu_logo'),
+            TechElement(height: 144, fileName: 'VisualStudio_logo'),
+            TechElement(height: 144, fileName: 'Vscode_logo'),
+            TechElement(height: 144, fileName: 'AndroidStudio_logo'),
           ],
         ),
-        const SizedBox(height: 50),
+        const SizedBox(height: 48),
       ],
     );
   }

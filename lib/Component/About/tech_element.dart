@@ -66,7 +66,7 @@ class _TechElementState extends State<TechElement>
         height: widget.height,
         decoration: BoxDecoration(
           border: Border.all(
-            width: 1 + _borderAnimation.value * 0.8,
+            width: 1 + _borderAnimation.value * 0.4,
             color: colorScheme.primary.withAlpha(
               96 + (_borderAnimation.value * 25.5 - 96).round(),
             ),
