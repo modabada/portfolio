@@ -76,12 +76,10 @@ class _TechElementState extends State<TechElement>
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: <Widget>[
-            Expanded(
-              child: Container(
-                decoration: BoxDecoration(
-                  color: colorScheme.onPrimaryContainer.withAlpha(32),
-                  borderRadius: BorderRadius.circular(widget.height),
-                ),
+            Container(
+              decoration: BoxDecoration(
+                color: colorScheme.onPrimaryContainer.withAlpha(32),
+                borderRadius: BorderRadius.circular(widget.height),
               ),
             ),
             Padding(

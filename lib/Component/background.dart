@@ -9,7 +9,7 @@ class Background extends StatelessWidget {
     final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return DecoratedBox(
       decoration: BoxDecoration(
-        color: colorScheme.background,
+        color: colorScheme.surface,
       ),
       child: const SizedBox.expand(),
     );
