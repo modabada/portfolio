@@ -49,7 +49,8 @@ class _AnimatedElementState extends State<AnimatedElement>
 
     WidgetsBinding.instance.addPersistentFrameCallback(
       (final Duration duration) {
-        _widgetWidth = context.size!.width;
+        if(mounted){
+        _widgetWidth = context.size!.width;}
       },
     );
   }
