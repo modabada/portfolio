@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/Component/About/waving_hand.dart';
 
 @immutable
-class GreetingBanner extends StatelessWidget {
-  const GreetingBanner({super.key});
+class AboutPageGreetingBanner extends StatelessWidget {
+  const AboutPageGreetingBanner({super.key});
 
   @override
   Widget build(final BuildContext context) {

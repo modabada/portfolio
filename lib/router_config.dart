@@ -1,12 +1,12 @@
 import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
-import 'package:portfolio/Component/About/aboutpage.dart';
-import 'package:portfolio/Component/Award/award.dart';
+import 'package:portfolio/Component/About/about_page.dart';
+import 'package:portfolio/Component/Award/award_page.dart';
 import 'package:portfolio/Component/Home/homepage.dart';
-import 'package:portfolio/Component/Projects/projects.dart';
-import 'package:portfolio/Component/Resume/resume.dart';
-import 'package:portfolio/Component/School/schoolpage.dart';
-import 'package:portfolio/Component/errorpage.dart';
+import 'package:portfolio/Component/Projects/projects_page.dart';
+import 'package:portfolio/Component/Resume/resume_page.dart';
+import 'package:portfolio/Component/School/school_page.dart';
+import 'package:portfolio/Component/error_page.dart';
 import 'package:portfolio/router.dart';
 
 final Handler homePageHandler = Handler(

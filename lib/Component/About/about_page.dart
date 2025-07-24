@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/Component/About/greeting_banner.dart';
+import 'package:portfolio/Component/About/about_page_greeting_banner.dart';
 import 'package:portfolio/Component/About/tech_element.dart';
 import 'package:portfolio/Component/default_template.dart';
 
@@ -13,7 +13,7 @@ class AboutPage extends DefaultTemplate {
 
     return ListView(
       children: <Widget>[
-        const GreetingBanner(),
+        const AboutPageGreetingBanner(),
         Center(
           child: Padding(
             padding: const EdgeInsets.only(top: 96, bottom: 48),

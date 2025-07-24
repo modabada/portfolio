@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/Component/Home/intro_banner.dart';
+import 'package:portfolio/Component/Home/homepage_intro_banner.dart';
 import 'package:portfolio/Component/default_template.dart';
 
 @immutable
@@ -18,7 +18,7 @@ class HomePage extends DefaultTemplate {
 
     return ListView(
       children: <Widget>[
-        const IntroBanner(),
+        const HomepageIntroBanner(),
         SizedBox(
           height: 600,
           child: Center(
