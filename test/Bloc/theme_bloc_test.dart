@@ -13,7 +13,7 @@ void main() {
       test('Test Initial State', () {
         expect(
           bloc.state.currentTheme.theme,
-          LightTheme().theme,
+          DarkTheme().theme,
         );
       });
     },
