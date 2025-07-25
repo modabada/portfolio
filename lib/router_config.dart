@@ -9,42 +9,42 @@ import 'package:portfolio/Component/School/school_page.dart';
 import 'package:portfolio/Component/error_page.dart';
 import 'package:portfolio/router.dart';
 
-final Handler homePageHandler = Handler(
+final Handler _homePageHandler = Handler(
   handlerFunc: (
     final BuildContext? context,
     final Map<String, List<String>> params,
   ) =>
       const HomePage(),
 );
-final Handler aboutPageHandler = Handler(
+final Handler _aboutPageHandler = Handler(
   handlerFunc: (
     final BuildContext? context,
     final Map<String, List<String>> params,
   ) =>
       const AboutPage(),
 );
-final Handler schoolPageHandler = Handler(
+final Handler _schoolPageHandler = Handler(
   handlerFunc: (
     final BuildContext? context,
     final Map<String, List<String>> params,
   ) =>
       const SchoolPage(),
 );
-final Handler projectsPageHandler = Handler(
+final Handler _projectsPageHandler = Handler(
   handlerFunc: (
     final BuildContext? context,
     final Map<String, List<String>> params,
   ) =>
       const ProjectsPage(),
 );
-final Handler awardPageHandler = Handler(
+final Handler _awardPageHandler = Handler(
   handlerFunc: (
     final BuildContext? context,
     final Map<String, List<String>> params,
   ) =>
       const AwardPage(),
 );
-final Handler resumePageHandler = Handler(
+final Handler _resumePageHandler = Handler(
   handlerFunc: (
     final BuildContext? context,
     final Map<String, List<String>> params,
@@ -65,32 +65,32 @@ class Routes {
       )
       ..define(
         homePageRoute,
-        handler: homePageHandler,
+        handler: _homePageHandler,
         transitionType: TransitionType.fadeIn,
       )
       ..define(
         aboutPageRoute,
-        handler: aboutPageHandler,
+        handler: _aboutPageHandler,
         transitionType: TransitionType.fadeIn,
       )
       ..define(
         schoolPageRoute,
-        handler: schoolPageHandler,
+        handler: _schoolPageHandler,
         transitionType: TransitionType.fadeIn,
       )
       ..define(
         projectsPageRoute,
-        handler: projectsPageHandler,
+        handler: _projectsPageHandler,
         transitionType: TransitionType.fadeIn,
       )
       ..define(
         awardPageRoute,
-        handler: awardPageHandler,
+        handler: _awardPageHandler,
         transitionType: TransitionType.fadeIn,
       )
       ..define(
         resumePageRoute,
-        handler: resumePageHandler,
+        handler: _resumePageHandler,
         transitionType: TransitionType.fadeIn,
       );
   }
