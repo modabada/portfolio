@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:portfolio/router.dart';
 
 @immutable
-class AnimatedElement extends StatefulWidget {
-  const AnimatedElement({
+class NavBarRouteButton extends StatefulWidget {
+  const NavBarRouteButton({
     required this.navigatePath,
     required this.element,
     super.key,
@@ -17,7 +17,7 @@ class AnimatedElement extends StatefulWidget {
   final Widget element;
 
   @override
-  State<AnimatedElement> createState() => _AnimatedElementState();
+  State<NavBarRouteButton> createState() => _NavBarRouteButtonState();
 
   @override
   void debugFillProperties(final DiagnosticPropertiesBuilder properties) {
@@ -26,7 +26,7 @@ class AnimatedElement extends StatefulWidget {
   }
 }
 
-class _AnimatedElementState extends State<AnimatedElement>
+class _NavBarRouteButtonState extends State<NavBarRouteButton>
     with SingleTickerProviderStateMixin {
   late final AnimationController _controller;
   late final Animation<double> _widthAnimation;
@@ -49,7 +49,9 @@ class _AnimatedElementState extends State<AnimatedElement>
 
     WidgetsBinding.instance.addPersistentFrameCallback(
       (final Duration duration) {
-        _widgetWidth = context.size!.width;
+        if (mounted) {
+          _widgetWidth = context.size!.width;
+        }
       },
     );
   }

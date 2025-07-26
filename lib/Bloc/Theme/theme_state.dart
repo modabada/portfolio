@@ -6,7 +6,7 @@ import 'package:portfolio/Core/Theme/app_theme.dart';
 class ThemeState {
   const ThemeState({required this.currentTheme});
 
-  factory ThemeState.init() => ThemeState(currentTheme: LightTheme());
+  factory ThemeState.init() => ThemeState(currentTheme: DarkTheme());
 
   final AppTheme currentTheme;
 

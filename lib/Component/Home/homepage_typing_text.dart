@@ -4,14 +4,14 @@ import 'package:korea_regexp/korea_regexp.dart';
 import 'package:portfolio/Component/Home/typing_bar.dart';
 
 @immutable
-class IntroText extends StatefulWidget {
-  const IntroText({super.key});
+class HomepageTypingText extends StatefulWidget {
+  const HomepageTypingText({super.key});
 
   @override
-  State<IntroText> createState() => _IntroTextState();
+  State<HomepageTypingText> createState() => _HomepageTypingTextState();
 }
 
-class _IntroTextState extends State<IntroText> {
+class _HomepageTypingTextState extends State<HomepageTypingText> {
   late final List<String> _textList;
   String _nowText = '';
   int _target = 0;

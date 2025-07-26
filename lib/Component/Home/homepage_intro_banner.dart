@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:portfolio/Component/Home/intro_text.dart';
+import 'package:portfolio/Component/Home/homepage_typing_text.dart';
 
 @immutable
-class IntroBanner extends StatelessWidget {
-  const IntroBanner({super.key});
+class HomepageIntroBanner extends StatelessWidget {
+  const HomepageIntroBanner({super.key});
 
   @override
   Widget build(final BuildContext context) {
@@ -27,7 +27,7 @@ class IntroBanner extends StatelessWidget {
                   overflow: TextOverflow.clip,
                   softWrap: false,
                 ),
-                const IntroText(),
+                const HomepageTypingText(),
                 Text(
                   '문인우 입니다',
                   style: textStyle,

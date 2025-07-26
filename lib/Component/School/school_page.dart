@@ -7,7 +7,7 @@ class SchoolPage extends DefaultTemplate {
 
   @override
   Widget body(final BuildContext context) => const Padding(
-        padding: EdgeInsets.only(top: 100),
+        padding: EdgeInsets.only(top: 96, bottom: 48),
         child: Center(
           child: Text(
             'schoolPage 제작중',

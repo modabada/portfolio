@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:portfolio/Component/NavBar/anim_element.dart';
 import 'package:portfolio/Component/NavBar/dark_mode_button.dart';
+import 'package:portfolio/Component/NavBar/nav_bar_route_button.dart';
 import 'package:portfolio/router.dart';
 
 @immutable
@@ -38,36 +38,36 @@ class _NavBarState extends State<NavBar> {
         width: double.infinity,
         child: Row(
           children: <Widget>[
-            AnimatedElement(
+            NavBarRouteButton(
               element: homeIcon,
               navigatePath: homePageRoute,
             ),
             const Expanded(
-              child: AnimatedElement(
+              child: NavBarRouteButton(
                 element: Text('About'),
                 navigatePath: aboutPageRoute,
               ),
             ),
             const Expanded(
-              child: AnimatedElement(
+              child: NavBarRouteButton(
                 element: Text('School'),
                 navigatePath: schoolPageRoute,
               ),
             ),
             const Expanded(
-              child: AnimatedElement(
+              child: NavBarRouteButton(
                 element: Text('Projects'),
                 navigatePath: projectsPageRoute,
               ),
             ),
             const Expanded(
-              child: AnimatedElement(
+              child: NavBarRouteButton(
                 element: Text('Award'),
                 navigatePath: awardPageRoute,
               ),
             ),
             const Expanded(
-              child: AnimatedElement(
+              child: NavBarRouteButton(
                 element: Text('Resume'),
                 navigatePath: resumePageRoute,
               ),
