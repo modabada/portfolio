@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+@immutable
 class SchoolPageBanner extends StatelessWidget {
   const SchoolPageBanner({super.key});
 
