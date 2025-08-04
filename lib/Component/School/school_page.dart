@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:portfolio/Component/School/project_image_slider.dart';
 import 'package:portfolio/Component/School/school_page_banner.dart';
 import 'package:portfolio/Component/default_template.dart';
 
@@ -15,6 +16,7 @@ class SchoolPage extends DefaultTemplate {
       child: ListView(
         children: const <Widget>[
           SchoolPageBanner(),
+          ProjectImageSlider(),
         ],
       ),
     );
