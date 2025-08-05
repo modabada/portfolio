@@ -42,6 +42,9 @@ class _ProjectImageSliderState extends State<ProjectImageSlider> {
                 const SchoolPageVideoPlayer(
                   url: 'lib/Assets/Cube_media/cube_3axis_standing.mp4',
                 ),
+                const SchoolPageVideoPlayer(
+                  url: 'lib/Assets/Cube_media/cube_sensor_testing.mp4',
+                ),
               ],
             ),
           ),
@@ -59,6 +62,10 @@ class _ProjectImageSliderState extends State<ProjectImageSlider> {
               _NavigationDot(
                 onTap: () => _controller.animateToPage(2),
                 isSelected: _current == 2,
+              ),
+              _NavigationDot(
+                onTap: () => _controller.animateToPage(3),
+                isSelected: _current == 3,
               ),
             ],
           ),
