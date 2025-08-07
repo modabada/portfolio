@@ -12,7 +12,6 @@ class SchoolPageBody extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 32),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
             '저의 졸업작품 입니다.',
