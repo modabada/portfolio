@@ -66,25 +66,28 @@ class _SchoolPageVideoPlayerState extends State<SchoolPageVideoPlayer>
             _animationController.reverse(from: 1);
           }
         }),
-        child: Stack(
-          alignment: Alignment.center,
-          children: <Widget>[
-            VideoPlayer(_videoController),
-            AnimatedBuilder(
-              animation: _animationController,
-              builder: (final BuildContext context, final Widget? child) =>
-                  Icon(
-                _videoController.value.isPlaying
-                    ? Icons.pause_circle_filled_rounded
-                    : Icons.play_circle_fill_rounded,
-                size: 48,
-                color: colorScheme.primary.withAlpha(
-                  (_animationController.value * 255).round(),
-                ),
+        child: !_videoController.value.isInitialized
+            ? const Center(child: CircularProgressIndicator())
+            : Stack(
+                alignment: Alignment.center,
+                children: <Widget>[
+                  VideoPlayer(_videoController),
+                  AnimatedBuilder(
+                    animation: _animationController,
+                    builder:
+                        (final BuildContext context, final Widget? child) =>
+                            Icon(
+                      _videoController.value.isPlaying
+                          ? Icons.pause_circle_filled_rounded
+                          : Icons.play_circle_fill_rounded,
+                      size: 48,
+                      color: colorScheme.primary.withAlpha(
+                        (_animationController.value * 255).round(),
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ],
-        ),
       ),
     );
   }
