@@ -37,13 +37,13 @@ class _ProjectImageSliderState extends State<ProjectImageSlider> {
                   'lib/Assets/Cube_media/cube_main_image.png',
                 ),
                 const SchoolPageVideoPlayer(
+                  url: 'lib/Assets/Cube_media/cube_sensor_testing.mp4',
+                ),
+                const SchoolPageVideoPlayer(
                   url: 'lib/Assets/Cube_media/cube_1axis_standing.mp4',
                 ),
                 const SchoolPageVideoPlayer(
                   url: 'lib/Assets/Cube_media/cube_3axis_standing.mp4',
-                ),
-                const SchoolPageVideoPlayer(
-                  url: 'lib/Assets/Cube_media/cube_sensor_testing.mp4',
                 ),
               ],
             ),
